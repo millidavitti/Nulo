@@ -1,0 +1,98 @@
+.calendar {
+	display: grid;
+	gap: 10px;
+	box-shadow: 3px 5px 10px var(--highlights);
+	padding: 20px 10px;
+	margin: 0 auto;
+	max-width: 400px;
+	border-bottom-left-radius: 30px;
+	background: var(--bg);
+}
+.nav {
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+}
+.view {
+	text-align: center;
+	margin: auto;
+}
+.right {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: auto;
+	width: 30px;
+	height: 30px;
+	padding: 5px;
+	border-radius: 50%;
+	outline: 1px solid var(--a);
+	cursor: pointer;
+}
+.left {
+	width: 30px;
+	height: 30px;
+	padding: 5px;
+	border-radius: 50%;
+	outline: 1px solid var(--a);
+	cursor: pointer;
+}
+
+.weekDays {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	text-align: center;
+}
+
+.dates {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	/* gap: 10px; */
+	width: 100%;
+	height: 250px;
+	font-weight: 500;
+	border-bottom-left-radius: 30px;
+	overflow: hidden;
+}
+
+.dates span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	/* background-color: palegreen; */
+}
+
+.dates span:hover {
+	background-color: var(--highlights);
+	color: var(--headers);
+}
+
+.today {
+	border: 5px solid grey;
+}
+.past {
+	pointer-events: none;
+	color: var(--outline);
+}
+.pick {
+	background-color: var(--headers);
+	color: white;
+}
+.range {
+	background-color: rgb(78, 172, 170);
+	/* background-color: rgb(100, 223, 220); */
+	color: var(--headers);
+}
+
+@keyframes slide {
+	0% {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}

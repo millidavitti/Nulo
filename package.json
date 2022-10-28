@@ -1,0 +1,24 @@
+{
+	"name": "nulo",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"next": "npx create-next-app@latest",
+		"dev": "next dev",
+		"server": "npm run dev --prefix server",
+		"build": "npm run build --prefix client"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/millidavitti/Nulo.git"
+	},
+	"keywords": [],
+	"author": "Donald Abua <abuadonald@gmail.com>",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/millidavitti/Nulo/issues"
+	},
+	"homepage": "https://github.com/millidavitti/Nulo#readme"
+}

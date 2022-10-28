@@ -1,0 +1,14 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/hotel/checkout": "pages/hotel/checkout.html",
+  "/hotel/hotel-details": "pages/hotel/hotel-details.html",
+  "/hotel/listings": "pages/hotel/listings.html",
+  "/hotel/successfully-booked": "pages/hotel/successfully-booked.html",
+  "/": "pages/index.html",
+  "/sandbox": "pages/sandbox.html",
+  "/user/[path]": "pages/user/[path].html",
+  "/_document": "pages/_document.js",
+  "/sign": "pages/sign.js",
+  "/404": "pages/404.html"
+}

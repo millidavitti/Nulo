@@ -1,0 +1,20 @@
+.fixed {
+	position: fixed;
+	z-index: 200;
+	outline: auto;
+	/* height: 80vh;
+	width: 100%; */
+	inset: 0;
+	background: pink;
+}
+
+.child {
+	height: calc(100% - 300px);
+	width: 100%;
+	background: blue;
+	border: 10px solid white;
+}
+.child2 {
+	height: 300px;
+	width: 100%;
+}

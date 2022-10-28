@@ -1,0 +1,96 @@
+.cardSlider {
+	width: 100%;
+	height: fit-content;
+	position: relative;
+	/* display: none; */
+}
+
+.cardSlider:hover .left {
+	opacity: 1;
+	pointer-events: unset;
+}
+.cardSlider:hover .right {
+	opacity: 1;
+	pointer-events: unset;
+}
+
+.discountBookmark {
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	top: 10px;
+	padding: 5px 10px;
+}
+.discount {
+	background-color: crimson;
+	display: flex;
+	align-items: center;
+	height: fit-content;
+	padding: 0 10px;
+	border-radius: 30px;
+	color: white;
+}
+.bookmark {
+	display: flex;
+	/* padding: 5px; */
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.447);
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+}
+
+.bookmark svg {
+	margin: auto;
+	/* outline: auto; */
+}
+
+.left,
+.right {
+	position: absolute;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	width: 35px;
+	height: 35px;
+	z-index: 1;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 400ms ease-in;
+}
+
+.left svg,
+.right svg {
+	margin: auto;
+}
+
+.left {
+	background-color: white;
+	inset: 0;
+	margin: auto 0;
+	margin-left: 10px;
+}
+.right {
+	background-color: white;
+	inset: 0;
+	margin: auto 0;
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+.cardSlide {
+	display: flex;
+	height: 100%;
+	transition: transform 700ms cubic-bezier(0.175, 0.885, 0.32, 1.075);
+}
+
+.cardSlide img {
+	width: 100%;
+	height: 100%;
+	flex: 0 0 100%;
+	object-fit: cover;
+}

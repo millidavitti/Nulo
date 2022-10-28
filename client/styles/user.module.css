@@ -1,0 +1,116 @@
+.tab {
+	display: flex;
+	gap: 20px;
+	width: 100%;
+	overflow-x: scroll;
+}
+
+.tab::-webkit-scrollbar {
+	height: 0px;
+}
+
+.tab button {
+	flex: none;
+	outline: none;
+	border: none;
+	background: none;
+	padding: 35px 0;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+
+.acountInfo {
+	margin: 20px auto;
+	max-width: 600px;
+	padding: 0 20px;
+}
+.acountInfo form {
+	margin: 20px auto;
+	max-width: 600px;
+}
+
+.acountInfo button {
+	padding: 10px 20px;
+	border-radius: 30px;
+	background: #7f7aea;
+	font-size: 1rem;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
+.avatar {
+	display: flex;
+	position: relative;
+	width: fit-content;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.avatar input {
+	outline: auto;
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	z-index: 3;
+	cursor: pointer;
+	/* background-color: black; */
+}
+
+.avatar p {
+	color: white;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.avatar > div {
+	position: absolute;
+	inset: 0;
+	height: fit-content;
+	margin-top: auto;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.267);
+	transform: translateY(52px);
+	pointer-events: none;
+	transition: transform 300ms ease-in;
+}
+
+.avatar:hover > div {
+	transform: translateY(0);
+	pointer-events: unset;
+}
+
+.input {
+	display: grid;
+	gap: 10px;
+	margin: 40px 0;
+}
+
+.input label {
+	font-size: 1rem;
+	color: var(--headers);
+}
+
+.input input {
+	height: 40px;
+	outline: 2px solid var(--outline);
+	border: none;
+	border-radius: 15px;
+	font-size: 1rem;
+	padding: 15px;
+}
+
+.input select {
+	height: 40px;
+	outline: 2px solid var(--outline);
+	border: none;
+	border-radius: 15px;
+	padding: 10px;
+	padding-right: 30px;
+	font-size: 1rem;
+	background: none;
+}
+
+.input option {
+	background: none;
+}

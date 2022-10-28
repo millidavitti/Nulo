@@ -1,0 +1,888 @@
+.imgGrid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-auto-rows: calc(20vw);
+	gap: calc(1vw);
+	/* outline: auto; */
+}
+.imgGrid img {
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
+	object-position: center;
+}
+.imgGrid > div {
+	overflow: hidden;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.imgOverlay {
+	position: absolute;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.152);
+	opacity: 0;
+	transition: opacity 100ms ease-in;
+}
+.overlay {
+	display: flex;
+	position: fixed;
+	padding: 0 8px;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.452);
+	transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1);
+	z-index: 101;
+	backdrop-filter: blur(10px);
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: var(--descriptions);
+	font-size: var(--descriptionsFs);
+}
+.hrShort {
+	border: 1px solid var(--outline);
+	border-top: none;
+	width: 50px;
+	margin: 20px 0;
+}
+
+.hr {
+	border: 1px solid var(--outline);
+	border-top: none;
+	margin: 40px 0;
+}
+
+.leftImg {
+	grid-column: 1/9;
+	grid-row: 1/4;
+	position: relative;
+}
+
+.topImg {
+	position: relative;
+	grid-column: 9/-1;
+}
+
+.midImg {
+	position: relative;
+	grid-column: 9/-1;
+}
+
+.bottomImg {
+	position: relative;
+	grid-column: 9/-1;
+}
+
+.leftImg:hover .imgOverlay,
+.topImg:hover .imgOverlay,
+.midImg:hover .imgOverlay,
+.bottomImg:hover .imgOverlay {
+	opacity: 1;
+}
+
+.hotelType {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0;
+}
+
+.hotelType span {
+	padding: 5px 10px;
+	color: #4f97e2;
+	background: #dbeafe;
+	border-radius: 30px;
+	font-weight: 500;
+}
+
+.ratingLocation {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	margin: 10px 0;
+	/* justify-content: space-between; */
+}
+
+.ratingLocation p:first-child span {
+	color: var(--descriptions);
+	font-size: var(--descriptionsFs);
+}
+
+.ratingLocation p:last-child {
+	display: flex;
+	justify-content: space-between;
+	gap: 5px;
+	font-size: var(--descriptionsFs);
+}
+
+.host {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 20px 0;
+}
+
+.host img {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.host p {
+	font-size: var(--descriptionsFs);
+	color: var(--descriptions);
+}
+.host span {
+	font-size: var(--descriptionsFs);
+	font-weight: 500;
+}
+
+.hotelSpecs {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 20px 0;
+	height: 100px;
+	border-top: 1px solid var(--outline);
+	border-bottom: 1px solid var(--outline);
+}
+
+.stayInfo {
+	margin: 40px 0;
+}
+
+.amenities .icons {
+	display: grid;
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+.amenities .icons p {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: var(--descriptionsFs);
+}
+
+.showMore {
+	border: 1px solid var(--outline);
+	padding: 10px 15px;
+	font-weight: 500;
+	background: none;
+	border-radius: 30px;
+	margin: 40px 0;
+	margin-bottom: 0;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.rates {
+	display: grid;
+	gap: 10px;
+}
+
+.rates > div {
+	border-radius: 10px;
+	padding: 15px;
+	display: flex;
+	justify-content: space-between;
+	/* margin: 10px 0; */
+}
+
+.rates p {
+	color: var(--descriptions);
+	font-size: var(--descriptionsFs);
+}
+
+.rates > div:nth-child(odd) {
+	background-color: var(--a);
+}
+
+.hostRatings {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.hostRatings img {
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.hostedBy {
+	font-size: 1.3rem;
+	font-weight: 500;
+}
+
+.reviewStars {
+	display: flex;
+	gap: 10px;
+}
+
+.customerTextReview {
+	display: flex;
+	border: 1px solid var(--outline);
+	padding: 10px;
+	border-radius: 20px;
+	width: 100%;
+	min-height: 40px;
+	background-color: var(--bg);
+	margin: 20px 0;
+}
+
+.customerTextReview input {
+	font-size: var(--descriptionsFs);
+}
+
+.customerTextReview button {
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	border: none;
+	display: flex;
+	background-color: var(--submitBtns);
+	cursor: pointer;
+	color: #dfe9ff;
+}
+
+.review {
+	display: flex;
+	gap: 20px;
+	padding: 30px 0;
+	border-bottom: 1px solid var(--outline);
+}
+.review > div {
+	display: grid;
+	gap: 10px;
+}
+.customerAvatar {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.customer {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.customerRating {
+	display: flex;
+	gap: 5px;
+}
+.customerName h3 {
+	font-size: var(--descriptionsFs);
+}
+.customerName p {
+	color: var(--descriptions);
+	font-size: var(--descriptionsFs);
+}
+
+.map {
+	min-height: 300px;
+	height: 1vw;
+	margin-top: 40px;
+	margin-bottom: 90px;
+}
+.cancellationPolicy {
+	margin: 40px 0;
+}
+.checkInTime {
+	display: grid;
+	gap: 10px;
+	margin: 40px 0;
+}
+
+.checkInTime > div {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.checkInTime p {
+	color: var(--descriptions);
+	font-size: var(--descriptionsFs);
+}
+.checkInTime > div:nth-child(even) {
+	background-color: var(--a);
+}
+
+.thingsToKnow h3 {
+	font-size: var(--descriptionsFs);
+}
+
+.specialNote ul {
+	margin: 20px 0;
+	display: grid;
+	gap: 10px;
+	list-style: none;
+}
+
+.reserveBar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+	position: fixed;
+	height: 60px;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	outline: 1px solid var(--outline);
+	background: var(--bgd);
+	z-index: 98;
+}
+
+.reservationPrice {
+	font-weight: 600;
+	font-size: var(--descriptionsFs);
+}
+
+.reservationPrice span {
+	font-weight: normal;
+	color: var(--descriptions);
+}
+
+.reservationDate {
+	font-weight: 500;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.reserveBar button {
+	padding: 10px 15px;
+	border: none;
+	border-radius: 20px;
+	background: var(--submitBtns);
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.confirmationPayment {
+	position: fixed;
+	z-index: 100;
+	background-color: var(--bg);
+	width: 100%;
+	overflow: scroll;
+	top: 0;
+	height: 100vh;
+	transition: scale 300ms cubic-bezier(0.175, 0.885, 0.32, 1.075);
+}
+
+.confirmationPayment::-webkit-scrollbar {
+	display: none;
+}
+
+.confirmationPayment h2 {
+	font-size: 2rem;
+	margin: 50px 0;
+}
+
+.closeBar {
+	display: flex;
+	padding: 0 20px;
+	height: 35px;
+	background: var(--a);
+	cursor: pointer;
+	position: sticky;
+	top: 0;
+}
+.closeBar span {
+	margin: auto 0;
+}
+
+.bookingDetails {
+	display: grid;
+}
+
+.editDuration,
+.editGuests {
+	background-color: var(--bg);
+	margin: auto;
+	padding: 10px;
+	border-radius: 10px;
+	max-width: 450px;
+	width: 95vw;
+	height: fit-content;
+	background-color: rgba(255, 255, 255, 0.252);
+	backdrop-filter: blur(7px);
+	transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.editDuration > span,
+.editGuests > span {
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 1.5rem;
+	color: white;
+}
+
+.durationGuest {
+	outline: 1px solid var(--outline);
+	border-radius: 25px;
+	padding: 10px;
+	margin: 30px 0;
+}
+
+.bookingDetails > h3 {
+	font-size: 1.3rem;
+}
+
+.bookingDetails > p {
+	font-size: var(--descriptionsFs);
+	text-decoration: underline;
+	cursor: pointer;
+	width: fit-content;
+}
+
+.bookingDuration {
+	display: grid;
+	gap: 10px;
+	border-bottom: 1px solid var(--outline);
+}
+.bookingDuration span,
+.bookingGuest span {
+	cursor: pointer;
+}
+
+.bookingDuration > div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.bookingDuration > div > div p:first-child {
+	font-size: var(--descriptionsFs);
+	color: var(--descriptions);
+}
+
+.bookingDuration > div > div p:last-child {
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+
+.bookingGuest > div,
+.bookingDuration > div {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 0;
+}
+
+.bookingGuest > div > div p:first-child {
+	font-size: var(--descriptionsFs);
+	color: var(--descriptions);
+}
+
+.bookingGuest > div > div p:last-child {
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+
+.payment h2 {
+	margin: 0;
+}
+.payment nav {
+	margin: 30px 0;
+}
+.payment nav > span {
+	padding: 5px 10px;
+	border: none;
+	background: none;
+	border-radius: 30px;
+	background: var(--headers);
+	color: var(--bg);
+	font-size: var(--descriptionsFs);
+	font-weight: 500;
+}
+
+.payment form {
+	display: grid;
+	gap: 25px;
+	margin: 20px 0;
+}
+
+.payment form label {
+	font-weight: 600;
+	font-size: var(--descriptionsFs);
+}
+
+.payment form > div:nth-child(1),
+.payment form > div:nth-child(2) {
+	display: grid;
+	gap: 5px;
+}
+
+.payment form input {
+	padding: 5px 10px;
+	border-radius: 10px;
+	border: 1px solid var(--outline);
+	outline: none;
+}
+
+.expiration {
+	display: flex;
+	gap: 20px;
+}
+
+.expiration * {
+	width: 100%;
+}
+
+.expiration > div {
+	display: grid;
+	gap: 5px;
+}
+
+.payment form button {
+	width: fit-content;
+	padding: 10px 15px;
+	border-radius: 30px;
+	border: none;
+	color: white;
+	font-weight: 500;
+	background-color: var(--submitBtns);
+	cursor: pointer;
+}
+
+.priceSummary {
+	outline: 1px solid var(--outline);
+	background-color: var(--bg);
+	border-radius: 30px;
+	max-width: 400px;
+	height: 550px;
+	width: 95vw;
+	margin: auto;
+	overflow: scroll;
+	transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.priceSummary::-webkit-scrollbar {
+	display: none;
+	position: relative;
+}
+.priceSummary .closeTitle {
+	display: flex;
+	padding: 10px 20px;
+	border-bottom: 1px solid var(--outline);
+	position: sticky;
+	top: 0;
+	background-color: var(--bg);
+}
+.priceSummary .closeTitle span {
+	cursor: pointer;
+}
+.priceSummary .closeTitle h2 {
+	margin: 0;
+	font-size: var(--descriptionsFs);
+	text-align: center;
+	margin: 0 auto;
+}
+.priceSummary .closeTitle + div {
+	margin: 30px auto;
+}
+
+.bookedHotelPic {
+	width: 100%;
+	height: 250px;
+	object-fit: cover;
+	border-radius: 30px;
+}
+
+.roomLocation {
+	color: var(--descriptions);
+	margin-top: 20px;
+}
+.hotelName {
+	font-weight: 500;
+	font-size: 1.5rem;
+}
+.hotelName + p {
+	color: var(--descriptions);
+	margin: 10px 0;
+}
+
+.priceDetail {
+	margin: 10px 0;
+	display: grid;
+	gap: 10px;
+}
+
+.priceDetail h2 {
+	margin: 0;
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+}
+
+.priceDetail div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.priceDetail div:nth-of-type(1) p,
+.priceDetail div:nth-of-type(2) p {
+	font-size: var(--descriptionsFs);
+	color: var(--descriptions);
+}
+
+.priceDetail div:nth-of-type(3) p {
+	font-size: var(--descriptionsFs);
+	font-weight: 600;
+}
+
+.priceDetail hr {
+	border: 1px solid var(--outline);
+	border-top: none;
+}
+
+.reservationSticky {
+	display: none;
+}
+
+.left {
+	grid-column: 1/-1;
+}
+
+@media screen and (min-width: 640px) {
+	.imgGrid {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-auto-rows: calc(20vh);
+		gap: calc(1vh);
+	}
+	.hr {
+		display: none;
+	}
+
+	.hotelSpecs {
+		border-bottom: none;
+		height: fit-content;
+		padding-top: 20px;
+		margin-bottom: 0;
+	}
+	.hotelType {
+		margin-top: 0;
+	}
+
+	.hotelTypeWrap,
+	.stayInfo,
+	.amenities,
+	.roomRates,
+	.availability,
+	.hostInfo,
+	.reviews,
+	.location,
+	.thingsToKnow,
+	.cmWrap {
+		outline: 1px solid var(--outline);
+		padding: 20px 15px;
+		margin: 40px 0;
+		border-radius: 20px;
+	}
+
+	.durationGuest {
+		display: flex;
+		padding: 0 15px;
+	}
+
+	.bookingDuration,
+	.bookingGuest {
+		border-bottom: none;
+		width: 100%;
+		padding: 15px 10px;
+	}
+
+	.bookingDuration {
+		border-right: 1px solid var(--outline);
+	}
+
+	.cmWrap > h2 {
+		border-bottom: 1px solid var(--outline);
+		padding-bottom: 30px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.container {
+		max-width: 768px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.reserveBar {
+		display: none;
+	}
+
+	.container {
+		max-width: 1180px;
+	}
+
+	.grid {
+		position: relative;
+		gap: 20px;
+		margin: 0 auto;
+	}
+	.left {
+		grid-column: 1/8;
+	}
+
+	.cmWrap {
+		grid-column: 1/8;
+		margin-top: 0;
+	}
+
+	.priceSummary {
+		grid-column: 8/13;
+		padding: 20px 0;
+		margin: 0;
+		width: 100%;
+		max-width: none;
+		height: fit-content;
+	}
+
+	.priceSummaryFlex {
+		display: flex;
+		gap: 20px;
+	}
+
+	.roomLocation {
+		margin-top: 0;
+	}
+
+	.bookedHotelPic {
+		width: 200px;
+		height: 150px;
+		border-radius: 20px;
+	}
+
+	.reservationSticky {
+		display: initial;
+		border-radius: 20px;
+		height: 400px;
+		position: sticky;
+		margin: 40px 0;
+		padding: 20px;
+		top: 90px;
+		grid-column: 8/-1;
+		outline: 1px solid var(--outline);
+	}
+	.priceRating {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.priceRating .rating {
+		font-size: 1rem;
+	}
+	.priceRating p:first-child {
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
+	.priceRating p:first-child span {
+		color: var(--descriptions);
+		font-weight: initial;
+		font-size: var(--descriptionsFs);
+	}
+
+	.checkInCheckOut {
+		outline: 1px solid var(--outline);
+		margin: 20px 0;
+		border-radius: 30px;
+	}
+
+	.checkInOutDates {
+		display: flex;
+	}
+
+	.checkInOutDates > div {
+		display: flex;
+		padding: 10px 20px;
+		gap: 20px;
+		width: 100%;
+		border-bottom: 1px solid var(--outline);
+	}
+
+	.checkInOutDates > div p:first-child {
+		font-weight: 600;
+		font-size: var(--descriptionsFs);
+		cursor: pointer;
+	}
+	.checkInOutDates > div p:last-child {
+		color: var(--descriptions);
+	}
+
+	.checkInOutDates > div:first-child {
+		border-right: 1px solid var(--outline);
+	}
+
+	.checkInGuests {
+		padding: 10px 20px;
+	}
+
+	.checkInGuests > div {
+		display: flex;
+		gap: 20px;
+		width: 100%;
+	}
+
+	.checkInGuests > div p:first-child {
+		font-weight: 600;
+		font-size: var(--descriptionsFs);
+	}
+	.checkInGuests > div p:last-child {
+		color: var(--descriptions);
+	}
+
+	.pricing {
+		padding: 10px 0;
+	}
+	.priceService {
+		display: grid;
+		gap: 10px;
+	}
+	.priceService p {
+		display: flex;
+		justify-content: space-between;
+	}
+	.priceService p span {
+		color: var(--descriptions);
+		font-size: var(--descriptionsFs);
+	}
+
+	.priceService + p {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.priceService + p span {
+		font-weight: 600;
+		font-size: var(--descriptionsFs);
+		margin: 10px 0;
+	}
+
+	.pricing button {
+		width: 100%;
+		padding: 10px 15px;
+		border-radius: 20px;
+		font-size: var(--descriptionsFs);
+		color: white;
+		font-weight: 500;
+		outline: none;
+		border: none;
+		background-color: var(--submitBtns);
+		cursor: pointer;
+		transition: 350ms cubic-bezier(0.175, 0.885, 0.32, 1.25);
+	}
+
+	.pricing button:active {
+		scale: 0.9;
+	}
+}

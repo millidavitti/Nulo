@@ -1,0 +1,2158 @@
+schema {
+  query: Query
+}
+
+type Query {
+  """
+  Returns the list of available accommodation types.
+  
+  Equivalent to GET /types/accommodations
+  """
+  apiAccommodationsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiAccommodationsRS
+  """
+  Returns the list of available amenities. 
+  
+  Equivalent to GET /types/amenities
+  """
+  apiAmenitiesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiAmenitiesRS
+  """
+  Returns the list of available board groups.
+  
+  Equivalent to GET /types/boardgroups
+  """
+  apiBoardGroupsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiBoardGroupsRS
+  """
+  Returns the list of available board types.
+  
+  Equivalent to GET /types/boards
+  """
+  apiBoardsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiBoardsRS
+  """
+  Returns the list of available categories.
+  
+  Equivalent to GET /types/categories
+  """
+  apiCategoriesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiCategoriesRS
+  """
+  Returns the list of available chains. 
+  
+  Equivalent to GET /types/chains
+  """
+  apiChainsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiChainsRS
+  """
+  Returns the list of available countries.
+  
+  This is the higher level available in our destination tree. We do not allow search by country, but it's included for organizational reasons (to group destinations) and because the country codes returned are used in other levels of APItude (for example to define the sourceMarket in Availability operation of [Hotel Booking API](/documentation/hotels/booking-api/api-reference/).
+  
+  Equivalent to GET /locations/countries
+  """
+  apiCountriesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiCountriesRS
+  """
+  Returns the list of available currencies.
+  
+  Equivalent to GET /types/currencies
+  """
+  apiCurrenciesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiCurrenciesRS
+  """
+  Return the list of available destinations, zones and grouping zones. 
+  
+  Destinations are the highest level entities in our destination tree by which availability can be searched. Please note that destination codes are not IATA codes. It is very important to understand that our 'destination' will not always only correspond with a unique city, but usually with the main city and the area surrounding the city. 
+  
+  For example, the destination code NYC in the US, corresponds with the whole New York Area, so it is not limited to the city of New York, but also covers the surrounding areas, such as New Jersey and The Hamptons. Another example is BCN in Spain, which corresponds with the entire Barcelona Province; so it searches hotels located in the city of Barcelona, but also in other cities within the Province of Barcelona, such us Hospitalet de Llobregat, Terrassa and Sabadell. So when you search for availability using the destination code, you will receive results that may be located far from the main city for which you are actually searching.
+  
+  It is very important to check the locations that the search retrieves to avoid booking hotels in a different location than the one requested by your customers.
+  
+  Equivalent to GET /locations/destinations
+  """
+  apiDestinationsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    Filter to limit the results for an specific destination or list of destinations.
+    """
+    codes: [String]
+    """Filter for a specific country of list of countries."""
+    countryCodes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiDestinationsRS
+  """
+  Returns the list of available facilities.
+  
+  Equivalent to GET /types/facilities
+  """
+  apiFacilitiesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiFacilitiesRS
+  """
+  Returns the list of available facility groups.
+  
+  Equivalent to GET /types/facilitygroups
+  """
+  apiFacilityGroupsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiFacilityGroupsRS
+  """
+  Returns the list of available facility typologies.Remarks: Since all fields are returned by default, there won't be any field to filter.
+  
+  Equivalent to GET /types/facilitytypologies
+  """
+  apiFacilityTypologiesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiFacilityTypologiesRS
+  """
+  Returns the descriptions of the different category groups.
+  
+  Equivalent to GET /types/groupcategories
+  """
+  apiGroupCategoriesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiGroupCategoriesRS
+  """
+  Returns all the details associated to the Hotel.
+  
+  Equivalent to GET /hotels/{hotelCodes}/details
+  """
+  apiHotelDetailsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """Code or codes of specific hotels from which to get details."""
+    hotelCodes: String!
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiHotelDetailsRS
+  """
+  Returns the list of currently existing hotels in Hotelbeds portfolio.
+  
+  Equivalent to GET /hotels
+  """
+  apiHotelsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """Filter for a specific hotel or list of hotels."""
+    codes: [Int]
+    """Filter to limit the results for an specific country."""
+    countryCode: String
+    """Filter to limit the results for an specific destination."""
+    destinationCode: String
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    Use "webOnly" to include in the response hotels sellable only to websites. Use "notOnSale" to include in the response hotels without rates on sale. Both values can be combined either  this way:  ?includeHotels=webOnly, notOnSale  or this way:  ?includeHotels=webOnly&includeHotels=notOnSale . By default non of them is included in the response.
+    """
+    includeHotels: String
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    Sending this parameter as true in the /hotels operations will only return the hotels which possess at least one PMSRoomCode (useful when mapping against the original property codes).
+    """
+    pMSRoomCode: Boolean
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiHotelsRS
+  """
+  Returns the descriptions of the different image types.
+  
+  Equivalent to GET /types/imagetypes
+  """
+  apiImageTypesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiImageTypesRS
+  """
+  Repair works, facilities closed,...
+  
+  Equivalent to GET /types/issues
+  """
+  apiIssuesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiIssuesRS
+  """
+  Returns the list of available languages.
+  
+  The Languages operation is connected to all the operations in which a description is returned, since we return the language code in which that description has been returned.
+  
+  Equivalent to GET /types/languages
+  """
+  apiLanguagesRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiLanguagesRS
+  """
+  Returns the list of available promotions.
+  
+  Equivalent to GET /types/promotions
+  """
+  apiPromotionsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiPromotionsRS
+  """
+  Returns the list of available values for the rateClass.
+  
+  Equivalent to GET /types/classifications
+  """
+  apiRateClassRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiRateClassRS
+  """
+  Returns the descriptions of the rate comments associated with the hotel that the hotelier wants the client to read before confirming the booking with the given date.
+  
+  Equivalent to GET /types/ratecommentdetails
+  """
+  apiRateCommentDetailsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """Code (symbol pipe should be escaped with %7C HTML encoding)"""
+    code: String!
+    """Comment date"""
+    date: String!
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiRateCommentDetailsRS
+  """
+  Returns the descriptions of the rate comments associated with the hotel that the hotelier wants the client to read before confirming the booking.
+  
+  Equivalent to GET /types/ratecomments
+  """
+  apiRateCommentsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiRateCommentsRS
+  """
+  Returns the list of available rooms.
+  
+  Equivalent to GET /types/rooms
+  """
+  apiRoomsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiRoomsRS
+  """
+  Returns the list of available segments. 
+  
+  Equivalent to GET /types/segments
+  """
+  apiSegmentsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiSegmentsRS
+  """
+  List of terminals per country/destination
+  
+  Equivalent to GET /types/terminals
+  """
+  apiTerminalsRS(
+    """
+    Response format, posible values are application/json and application/xml.
+    """
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """List of codes to filter by."""
+    codes: [String]
+    """
+    The list of fields to be received in the response. To retrieve all the fields use â€˜allâ€™. If nothing is specified, all fields are returned. See the complete list of available fields in the response.
+    """
+    fields: [String]
+    """
+    The number of the initial record to receive. If nothing is specified, 1 is the default value.
+    """
+    from: Int
+    """
+    The language code for the language in which you want the descriptions to be returned. If language is not specified, English will be used as default language.
+    """
+    language: String
+    """
+    Specifying this parameter limits the results to those modified or added after the date specified. The required format is YYYY-MM-DD.
+    """
+    lastUpdateTime: String
+    """
+    The number of the final record to receive. If nothing is indicated, 100 is the default value.
+    """
+    to: Int
+    """
+    Defines if you want to receive the descriptions in English if the description is not available in the language requested.
+    """
+    useSecondaryLanguage: Boolean
+  ): ApiTerminalsRS
+}
+
+"""Response of Accommodations operation."""
+type ApiAccommodationsRS {
+  """List of accommodations."""
+  accommodations: [ApiAccommodation]
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned accommodations."""
+  from: Int
+  """Highest value of the range of returned accommodations."""
+  to: Int
+  """
+  Total number of accommodations matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a accommodation type."""
+type ApiAccommodation {
+  """Code of the accommodation type."""
+  code: String
+  """Description of the accommodation type."""
+  typeDescription: String
+  typeMultiDescription: ApiContent
+}
+
+type ApiContent {
+  """
+  Text description, provided in the language defined in LanguageCode field.
+  """
+  content: String
+  """Code of the language in which the description is returned."""
+  languageCode: String
+}
+
+"""Relevant internal information."""
+type ApiAuditData {
+  """Environment where the request has been sent and processed."""
+  environment: String
+  """Server process time in milliseconds."""
+  processTime: String
+  """Release version identifier."""
+  release: String
+  """IP address of the system host."""
+  requestHost: String
+  """Server code or ID (for internal use)."""
+  serverId: String
+  """
+  Date/time when the request has been processed (always in Spanish time).
+  """
+  timestamp: String
+}
+
+"""
+Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+"""
+type ApiHotelbedsError {
+  """Internal token code of the error."""
+  code: String
+  """Descriptive message of the cause of the error."""
+  message: String
+}
+
+enum Accept {
+  APPLICATION_XML
+  APPLICATION_JSON
+}
+
+"""Response of Amenities operation."""
+type ApiAmenitiesRS {
+  """List of amenities."""
+  amenities: [ApiAmenity]
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned amenities."""
+  from: Int
+  """Highest value of the range of returned amenities."""
+  to: Int
+  """
+  Total number of amenities matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+type ApiAmenity {
+  code: Int
+  description: ApiContent
+}
+
+"""Response of BoardGroups operation."""
+type ApiBoardGroupsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """List of board groups."""
+  boards: [ApiBoardGroup]
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned board groups."""
+  from: Int
+  """Highest value of the range of returned board groups."""
+  to: Int
+  """
+  Total number of board groups matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a board group."""
+type ApiBoardGroup {
+  """List of the internal board codes."""
+  boards: [String]
+  """Internal code of the board group."""
+  code: String
+  description: ApiContent
+}
+
+"""Response of Boards operation."""
+type ApiBoardsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """List of boards."""
+  boards: [ApiBoard]
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned boards."""
+  from: Int
+  """Highest value of the range of returned boards."""
+  to: Int
+  """
+  Total number of boards matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a board."""
+type ApiBoard {
+  """Internal code of the board."""
+  code: String
+  description: ApiContent
+  """Multilanguage code of the board type."""
+  multiLingualCode: String
+}
+
+"""Response of Categories operation."""
+type ApiCategoriesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """List of categories."""
+  categories: [ApiCategory]
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned categories."""
+  from: Int
+  """Highest value of the range of returned categories."""
+  to: Int
+  """
+  Total number of categories matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on an accommodation category."""
+type ApiCategory {
+  """
+  Code of the type of accommodation to which the category belongs. (apartment, hotel, home, etc.).
+  """
+  accommodationType: String
+  """Hotel star rating based on the information provided by the hotel."""
+  code: String
+  description: ApiContent
+  """Code of the group to which the category belongs."""
+  group: String
+  """
+  Simple category code used for filtering in [Hotel Booking API](/documentation/hotels/booking-api/api-reference/) Availability.
+  """
+  simpleCode: Int
+}
+
+"""Response of Chains operation."""
+type ApiChainsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """List of chains."""
+  chains: [ApiChain]
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned chains."""
+  from: Int
+  """Highest value of the range of returned chains."""
+  to: Int
+  """
+  Total number of chains matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a hotelier chain."""
+type ApiChain {
+  """Code of the chain."""
+  code: String
+  description: ApiContent
+}
+
+"""Response of Countries operation."""
+type ApiCountriesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """List of countries."""
+  countries: [ApiCountry]
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned countries."""
+  from: Int
+  """Highest value of the range of returned countries."""
+  to: Int
+  """
+  Total number of countries matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Country information."""
+type ApiCountry {
+  """Hotelbeds internal country code."""
+  code: String
+  description: ApiContent
+  """ISO 3166-2 Country Code."""
+  isoCode: String
+  """List of states/provinces/territories belonging to the country."""
+  states: [ApiState]
+}
+
+"""State information."""
+type ApiState {
+  """Internal code of the state."""
+  code: String
+  """Name of the state."""
+  name: String
+}
+
+"""Response of Currencies operation."""
+type ApiCurrenciesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """List of currencies."""
+  currencies: [ApiCurrency]
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned currencies."""
+  from: Int
+  """Highest value of the range of returned currencies."""
+  to: Int
+  """
+  Total number of currencies matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Currency."""
+type ApiCurrency {
+  """Internal currency code."""
+  code: String
+  """Indication for which rate type will be returned."""
+  currencyType: String
+  description: ApiContent
+}
+
+"""Response of Destinations operation."""
+type ApiDestinationsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """List of available destinations."""
+  destinations: [ApiDestination]
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned destinations."""
+  from: Int
+  """Highest value of the range of returned destinations."""
+  to: Int
+  """
+  Total number of destinations matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a destination of the destination tree."""
+type ApiDestination {
+  """Code of the destination."""
+  code: String
+  """Hotelbeds code for the country"""
+  countryCode: String
+  """List of groups of zones."""
+  groupZones: [ApiGroupZone]
+  """ISO Country Code."""
+  isoCode: String
+  name: ApiContent
+  """List of zones in which the destination is divided."""
+  zones: [ApiZone]
+}
+
+"""Information on a group of zones"""
+type ApiGroupZone {
+  """Code of the group of zones."""
+  groupZoneCode: String
+  name: ApiContent
+  """List of zones that belong to the group."""
+  zones: [Int]
+}
+
+"""
+Information on the zone inside the destination where to search for hotels.
+"""
+type ApiZone {
+  description: ApiContent
+  """Internal zone name. (only available for Hotel Detail)"""
+  name: String
+  """Internal Zone Code."""
+  zoneCode: Int
+}
+
+"""Response of Facilities operation."""
+type ApiFacilitiesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """List of facilities."""
+  facilities: [ApiFacility]
+  """Lowest value of the range of returned facilities."""
+  from: Int
+  """Highest value of the range of returned facilities."""
+  to: Int
+  """
+  Total number of facilities matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a hotel facility."""
+type ApiFacility {
+  """Code of the facility."""
+  code: Int
+  description: ApiContent
+  """Group the facility belongs to."""
+  facilityGroupCode: Int
+  """
+  Typology of the facility which determines the fields to receive in the hotels operation.
+  """
+  facilityTypologyCode: Int
+}
+
+"""Response of FacilityGroups operation."""
+type ApiFacilityGroupsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """List of groups of facilities."""
+  facilityGroups: [ApiFacilityGroup]
+  """Lowest value of the range of returned facility groups."""
+  from: Int
+  """Highest value of the range of returned facility groups."""
+  to: Int
+  """
+  Total number of facility groups matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a group of facilities."""
+type ApiFacilityGroup {
+  """Code of the facility group."""
+  code: Int
+  description: ApiContent
+}
+
+"""Response of FacilityTypologies operation."""
+type ApiFacilityTypologiesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """List of classifications for facilities."""
+  facilityTypologies: [ApiFacilityType]
+  """Lowest value of the range of returned facility typologies."""
+  from: Int
+  """Highest value of the range of returned facility typologies."""
+  to: Int
+  """
+  Total number of facility typologies matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Classification information of facilities."""
+type ApiFacilityType {
+  """Indicator if the ageFrom Value will be returned."""
+  ageFromFlag: Boolean
+  """Indicator if the ageTo Value will be returned."""
+  ageToFlag: Boolean
+  """Indicator if the amount Value will be returned."""
+  amountFlag: Boolean
+  """Indicator if the appType Value will be returned."""
+  appTypeFlag: Boolean
+  """Code of the typology."""
+  code: Int
+  """Indicator if the currency Value will be returned."""
+  currencyFlag: Boolean
+  """Indicator if the dateFrom Value will be returned."""
+  dateFromFlag: Boolean
+  """Indicator if the dateTo Value will be returned."""
+  dateToFlag: Boolean
+  """Indicator if the distance Value will be returned."""
+  distanceFlag: Boolean
+  """Indicator if the Fee Value will be returned."""
+  feeFlag: Boolean
+  """Indicator if the YesOrNo Value will be returned."""
+  indYesOrNoFlag: Boolean
+  """Indicator if the Logic Value will be returned."""
+  logicFlag: Boolean
+  """Indicator if the Number Value will be returned"""
+  numberFlag: Boolean
+  """Indicator if the Text Value will be returned."""
+  textFlag: Boolean
+  """Indicator if the timeFrom Value will be returned."""
+  timeFromFlag: Boolean
+  """Indicator if the timeTo Value will be returned."""
+  timeToFlag: Boolean
+}
+
+"""Response of GroupCategories operation."""
+type ApiGroupCategoriesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned group categories."""
+  from: Int
+  """List of group categories."""
+  groupCategories: [ApiGroupCategory]
+  """Highest value of the range of returned group categories."""
+  to: Int
+  """
+  Total number of group categories matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information of a group of categories."""
+type ApiGroupCategory {
+  """Code of the category group."""
+  code: String
+  description: ApiContent
+  name: ApiContent
+  """Internal order of the category group."""
+  order: Int
+}
+
+"""Response of HotelDetails operation"""
+type ApiHotelDetailsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned hotels."""
+  from: Int
+  """Information on a hotel."""
+  hotel: ApiHotel
+  """List of returned hotels matching the parameters used in the request."""
+  hotels: [ApiHotel]
+  """Highest value of the range of returned hotels."""
+  to: Int
+  """
+  Total number of hotels matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a hotel."""
+type ApiHotel {
+  """Information on a accommodation type."""
+  accommodationType: ApiAccommodation
+  """
+  Code of the type of accommodation. It will indicate the type of the hotel (apartment, hotel, home, etc.).
+  """
+  accommodationTypeCode: String
+  address: ApiContent
+  """List of amenities."""
+  amenities: [ApiAmenity]
+  """List of the internal amenity codes."""
+  amenityCodes: [Int]
+  """List of codes of board types offered at the hotel."""
+  boardCodes: [String]
+  """List of boards offered at the hotel."""
+  boards: [ApiBoard]
+  """Information on an accommodation category."""
+  category: ApiCategory
+  """Hotel rating based on the information provided by the hotel."""
+  categoryCode: String
+  """Information of a group of categories."""
+  categoryGroup: ApiGroupCategory
+  """Group name of the category to which the hotel belongs."""
+  categoryGroupCode: String
+  """Information on a hotelier chain."""
+  chain: ApiChain
+  """Code of the chain that the hotel belongs to."""
+  chainCode: String
+  city: ApiContent
+  """Hotelbeds internal hotel code."""
+  code: Int
+  """Defines the geolocation data."""
+  coordinates: ApiGeoLocation
+  """Country information."""
+  country: ApiCountry
+  """Code of the country where the hotel is located."""
+  countryCode: String
+  description: ApiContent
+  """Information on a destination of the destination tree."""
+  destination: ApiDestination
+  """Code of the destination of the hotel location."""
+  destinationCode: String
+  """
+  Hotel e-mail address. More than one email can be returned, separated by ";" characters.
+  """
+  email: String
+  """
+  The value follows a qualitative scale, the number 1 being always the top priority/preferential, and the rest of the product defined by our commercial departments. As of today, the possible values are:
+    1: Identifies preferential product with exclusive guaranteed availability.
+    2: Identifies top hotels.
+    3: Identifies the rest of hotels.
+    In case new values are added in the future, a proper communication campaign will be carried out to inform you.
+  
+  """
+  exclusiveDeal: Int
+  """List of facilities, amenities and installations in the hotel."""
+  facilities: [ApiHotelFacility]
+  """
+  Giata code of the hotel. Will only be returned if the client has agreement with Giata.
+  """
+  giataCode: Int
+  """List of hotel pictures."""
+  images: [ApiImage]
+  """List of points of interest close to the hotel."""
+  interestPoints: [ApiHotelPointOfInterest]
+  """List of issues affecting the hotel."""
+  issues: [ApiHotelIssue]
+  """Date of the last update in the information of the hotel."""
+  lastUpdate: String
+  """Accommodation registration number."""
+  license: String
+  name: ApiContent
+  """List of contact phones of the hotel."""
+  phones: [ApiHotelPhone]
+  """Hotel address postal code."""
+  postalCode: String
+  """
+  Hotelbeds internal sorting ranking (NOTE: please bear in mind is not related to hotel category).
+  """
+  ranking: Int
+  """List of available rooms types at the hotel."""
+  rooms: [ApiHotelRoom]
+  """
+  Health & Safety rating (NOTE: please bear in mind is not related to hotel category).
+  """
+  s2C: String
+  """List of the internal segment codes."""
+  segmentCodes: [Int]
+  """List of segments."""
+  segments: [ApiSegment]
+  """State information."""
+  state: ApiState
+  """Internal code of the state."""
+  stateCode: String
+  """
+  List of terminals associated to the hotel and their distance to the hotel.
+  """
+  terminals: [ApiHotelTerminal]
+  """Website URL of the hotel or the chain."""
+  web: String
+  """List of wildcard rooms."""
+  wildcards: [ApiWildCard]
+  """
+  Information on the zone inside the destination where to search for hotels.
+  """
+  zone: ApiZone
+  """Internal zone code, where the hotel is located."""
+  zoneCode: Int
+}
+
+"""Defines the geolocation data."""
+type ApiGeoLocation {
+  """Latitude coordinate for geolocation search."""
+  latitude: Float
+  """Longitude coordinate for geolocation search."""
+  longitude: Float
+}
+
+"""Information on a hotel facility."""
+type ApiHotelFacility {
+  """Minimum age to access the facility."""
+  ageFrom: Int
+  """Maximum age to access the facility."""
+  ageTo: Int
+  """Amount of the facility fee."""
+  amount: Float
+  """Application type of the facility fee."""
+  applicationType: String
+  """Currency of the facility fee."""
+  currency: String
+  """Date from which the facility is available."""
+  dateFrom: String
+  """Date until which the installation is available."""
+  dateTo: String
+  description: ApiContent
+  """Distance in meters to the facility."""
+  distance: Int
+  """Code of the facility."""
+  facilityCode: Int
+  """Group to which the facility belongs."""
+  facilityGroupCode: Int
+  """Name of the facility."""
+  facilityName: String
+  """Defines if the facility has cost or not at the establishment."""
+  indFee: Boolean
+  """
+  Indicates if the facility exists at the hotel. This field will be returned __only__ when the facility is at the hotel.
+  """
+  indLogic: Boolean
+  """Indicates in the mandatory facility exists at the hotel or not."""
+  indYesOrNo: Boolean
+  """Numeric value of the facility."""
+  number: Int
+  """
+  Order of facility in case there is more than one facility at the hotel.
+  """
+  order: Int
+  """Time from which the facility is available."""
+  timeFrom: String
+  """Time until which the facility is available."""
+  timeTo: String
+  """Indicates if the use of the facility will issue a voucher."""
+  voucher: Boolean
+}
+
+"""Describes an hotel picture."""
+type ApiImage {
+  """Characteristic code/s of the room."""
+  characteristicCode: String
+  """
+  Specifies where has the picture been taken (you can see the possible values in the response of types/imagetypes operation).
+  """
+  imageTypeCode: String
+  """Order in which the images are shown in the web page."""
+  order: Int
+  """Original hotel room code, directly sourced from the property"""
+  pMSRoomCode: String
+  """
+  URL of the image. For hotel images, we do not return the full path. Note that one of the following paths must be added by the client.
+  """
+  path: String
+  """Identifier of the room type."""
+  roomCode: String
+  """Internal Room type code, returned only for Unified clients."""
+  roomType: String
+  """Information on an hotel image type."""
+  type: ApiImageType
+  """Ordinal value at which the image should be presented."""
+  visualOrder: Int
+}
+
+"""Information on an hotel image type."""
+type ApiImageType {
+  """Code of the type of the image."""
+  code: String
+  description: ApiContent
+}
+
+"""Information on a point of interest near a hotel."""
+type ApiHotelPointOfInterest {
+  """Distance in meters to the point of interest."""
+  distance: String
+  """Code of the point of interest as a facility."""
+  facilityCode: Int
+  """Group to which the point of interest belongs as a facility."""
+  facilityGroupCode: Int
+  """Defines if there is a fee to access the point of interest."""
+  fee: Boolean
+  """Order of the point of interest."""
+  order: Int
+  """Name of the point of interest."""
+  poiName: String
+}
+
+"""Information on an hotel issue (repair works, facilities closed,...)."""
+type ApiHotelIssue {
+  """Indicator if there will be an alternative due to the issue."""
+  alternative: Boolean
+  """Date from when the issue will start."""
+  dateFrom: String
+  """Date when the issue will end."""
+  dateTo: String
+  description: ApiContent
+  """Code of the issue."""
+  issueCode: String
+  """Code of the type of incidence."""
+  issueType: String
+  """Issue order, in case there is more than one."""
+  order: Int
+}
+
+"""Information on a hotel phone line."""
+type ApiHotelPhone {
+  """Phone number."""
+  phoneNumber: String
+  """Type of phone line (phonebooking, phonehotel, faxnumber...)."""
+  phoneType: String
+}
+
+"""Information of the hotel room."""
+type ApiHotelRoom {
+  """Characteristic code/s of the room."""
+  characteristicCode: String
+  """Description of the room."""
+  description: String
+  """Identifier of the room type."""
+  roomCode: String
+  """
+  List of facilities, amenities and installations in the room of the hotel.
+  """
+  roomFacilities: [ApiHotelRoomFacility]
+  """List of the different departments in which the room is divided."""
+  roomStays: [ApiHotelRoomStay]
+  """Internal room type code. Returned only for Unified clients."""
+  roomType: String
+}
+
+"""Information on facilities and features associated to a hotel room."""
+type ApiHotelRoomFacility {
+  description: ApiContent
+  """Code of the facility."""
+  facilityCode: Int
+  """Code of the group to which the facility belongs."""
+  facilityGroupCode: Int
+  """Indicator if the facility has cost or not at the establishment."""
+  indFee: Boolean
+  """Indicator if the facility exists at the hotel or not."""
+  indLogic: Boolean
+  """Indicator if the mandatory facility exists at the hotel or not."""
+  indYesOrNo: Boolean
+  """Numeric value of the facility."""
+  number: Int
+  """
+  Order of facility in case there is more than one facility at the hotel.
+  """
+  order: Int
+  """Indicates if the use of the facility will issue a voucher."""
+  voucher: Boolean
+}
+
+"""Describes one of the departments in which the room is divided."""
+type ApiHotelRoomStay {
+  """Description of the type of department."""
+  description: String
+  """Numeric position of the department within the room."""
+  order: String
+  """Describes facilities associated to the department."""
+  roomStayFacilities: [ApiHotelRoomStayFacility]
+  """Code of the Department Type."""
+  stayType: String
+}
+
+"""Information on facilities and features in the RoomStays."""
+type ApiHotelRoomStayFacility {
+  description: ApiContent
+  """Code of the facility."""
+  facilityCode: Int
+  """Code of the group the facility belongs to."""
+  facilityGroupCode: Int
+  """Number of facilities."""
+  number: Int
+}
+
+type ApiSegment {
+  code: Int
+  description: ApiContent
+}
+
+"""Info of a terminal."""
+type ApiHotelTerminal {
+  description: ApiContent
+  """Distance in kilometers to the hotel."""
+  distance: Int
+  name: ApiContent
+  """Code of the terminal."""
+  terminalCode: String
+  """Code of the type of the terminal."""
+  terminalType: String
+}
+
+"""Information on a wildcard room."""
+type ApiWildCard {
+  """Code of the wildcard room characteristic."""
+  characteristicCode: String
+  hotelRoomDescription: ApiContent
+  """Code of the wildcard room type."""
+  roomCode: String
+  """Code of the wildcard room."""
+  roomType: String
+}
+
+"""Response of Hotels operation"""
+type ApiHotelsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned hotels."""
+  from: Int
+  """List of returned hotels matching the parameters used in the request."""
+  hotels: [ApiHotel]
+  """Highest value of the range of returned hotels."""
+  to: Int
+  """
+  Total number of hotels matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Response of ImageTypes operation."""
+type ApiImageTypesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned image types."""
+  from: Int
+  """List of image types."""
+  imageTypes: [ApiImageType]
+  """Highest value of the range of returned image types."""
+  to: Int
+  """
+  Total number of image types matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Response of Issues operation."""
+type ApiIssuesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned issues."""
+  from: Int
+  """List of issues that can affect an hotel and its facilities."""
+  issues: [ApiIssue]
+  """Highest value of the range of returned issues."""
+  to: Int
+  """
+  Total number of issues matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on an issue type (repair works, facilities closed,...)."""
+type ApiIssue {
+  """Indicator if there will be an alternative due to the issue."""
+  alternative: Boolean
+  """Code of the issue."""
+  code: String
+  description: ApiContent
+  name: ApiContent
+  """Code of the type of incidence."""
+  type: String
+}
+
+"""Response of Languages operation."""
+type ApiLanguagesRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned languages."""
+  from: Int
+  """List of languages."""
+  languages: [ApiLanguage]
+  """Highest value of the range of returned languages."""
+  to: Int
+  """
+  Total number of languages matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a language."""
+type ApiLanguage {
+  """Code of the language."""
+  code: String
+  description: ApiContent
+  """Name of the language on its own language."""
+  name: String
+}
+
+"""Response of Promotions operation."""
+type ApiPromotionsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned promotions."""
+  from: Int
+  """List of promotions."""
+  promotions: [ApiPromotion]
+  """Highest value of the range of returned promotions."""
+  to: Int
+  """
+  Total number of promotions matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information of a promotion that can be applied to hotels rates."""
+type ApiPromotion {
+  """Internal Promotion code."""
+  code: String
+  description: ApiContent
+  name: ApiContent
+}
+
+"""Returns the list of available values for the rateClass."""
+type ApiRateClassRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """List of rateClass."""
+  classifications: [ApiRateClass]
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned rateclass."""
+  from: Int
+  """Highest value of the range of returned rateclass."""
+  to: Int
+  """
+  Total number of rateclass matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information on a rateClass."""
+type ApiRateClass {
+  """Code of rateClass."""
+  code: String
+  description: ApiContent
+}
+
+"""Response of RateCommentDetails operation."""
+type ApiRateCommentDetailsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """Code of the comment of the hotel."""
+  code: String
+  """Date of the application of the rate."""
+  date: String
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned rate comment details."""
+  from: Int
+  """Code of the hotel."""
+  hotel: Int
+  """Code of the incoming office of the hotel."""
+  incoming: Int
+  """List of rate comment details."""
+  rateComments: [ApiRateComment]
+  """Highest value of the range of returned rate comment details."""
+  to: Int
+  """
+  Total number of rate comment details matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Definition of the rate comment."""
+type ApiRateComment {
+  """Final date of application of the comment."""
+  dateEnd: String
+  """Date from which the comment starts to apply."""
+  dateStart: String
+  """Rate comments description and language."""
+  description: String
+}
+
+"""Response of RateComments operation."""
+type ApiRateCommentsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned rate comments."""
+  from: Int
+  """List of rate comments."""
+  rateComments: [ApiRateComments]
+  """Highest value of the range of returned rate comments."""
+  to: Int
+  """
+  Total number of rate comments matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""
+Describes info that the hotelier wants the final passenger to read before confirming the booking.
+"""
+type ApiRateComments {
+  """Code of the rate comment."""
+  code: String
+  """List of rateComments."""
+  commentsByRates: [ApiRateCommentBlock]
+  """Code of the hotel."""
+  hotel: Int
+  """Code of the incoming office of the hotel."""
+  incoming: Int
+}
+
+"""Lists of rate comments and the rates that apply to them."""
+type ApiRateCommentBlock {
+  """Rate comments that apply to the rates."""
+  comments: [ApiRateComment]
+  """Rates for which the rate comments applies."""
+  rateCodes: [Int]
+}
+
+"""Response of Rooms operation."""
+type ApiRoomsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned rooms."""
+  from: Int
+  """List of rooms."""
+  rooms: [ApiRoom]
+  """Highest value of the range of returned rooms."""
+  to: Int
+  """
+  Total number of rooms matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Information describing a room."""
+type ApiRoom {
+  """Code of the room characteristic."""
+  characteristic: String
+  characteristicDescription: ApiContent
+  """Code of the room."""
+  code: String
+  """Description of the room."""
+  description: String
+  """Maximum number of adults allowed in the room."""
+  maxAdults: Int
+  """Maximum number of children allowed in the room."""
+  maxChildren: Int
+  """Maximum number of paxes allowed in the room."""
+  maxPax: Int
+  """Minimum number of adults allowed in the room."""
+  minAdults: Int
+  """Minimum number of adults allowed in the room."""
+  minPax: Int
+  """Code of the room type. Returned only for Unified clients."""
+  type: String
+  typeDescription: ApiContent
+}
+
+"""Response of Segments operation."""
+type ApiSegmentsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned segments."""
+  from: Int
+  """List of segments."""
+  segments: [ApiSegment]
+  """Highest value of the range of returned segments."""
+  to: Int
+  """
+  Total number of segments matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Response of Terminals operation."""
+type ApiTerminalsRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiHotelbedsError
+  """Lowest value of the range of returned terminals."""
+  from: Int
+  """List of terminals."""
+  terminals: [ApiTerminal]
+  """Highest value of the range of returned terminals."""
+  to: Int
+  """
+  Total number of terminals matching the parameters used in the request (regardless of pagination/returned range).
+  """
+  total: Int
+}
+
+"""Info of a terminal."""
+type ApiTerminal {
+  """Code of the terminal."""
+  code: String
+  """Code of the country where the terminal is located."""
+  country: String
+  description: ApiContent
+  name: ApiContent
+  """Code of the type of the terminal."""
+  type: String
+}

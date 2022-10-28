@@ -1,0 +1,17 @@
+sources:
+  - name: Bookings
+    handler:
+      openapi:
+        source: ./src/BookingAPI.yml
+        operationHeaders:
+          Api-key: '{context.headers["api-key"]}'
+          X-Signature: '{context.headers["x-signature"]}'
+          Accept: application/json
+  - name: Content
+    handler:
+      openapi:
+        source: ./src/ContentAPI.yml
+        operationHeaders:
+          Api-key: '{context.headers["api-key"]}'
+          X-Signature: '{context.headers["x-signature"]}'
+          Accept: application/json

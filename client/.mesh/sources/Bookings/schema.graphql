@@ -1,0 +1,2230 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  """
+  The BookingDetail operation allows to retrieve a booking with all its details from the booking reference locator.
+  
+  Equivalent to GET /bookings/{bookingId}
+  """
+  bookingDetailRS(
+    """Response format."""
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    Booking reference number taken from the confirmation response or from the booking list function. Format: XXX-YYYYYY
+    """
+    bookingId: String!
+    """
+    Language code that defines the language of the response. English will be used by default if this parameter is not informed.
+    """
+    language: String
+  ): BookingDetailRS
+  """
+  The booking list operation returns a list of bookings based on the search criteria. The most important information returned for each booking in the list is:
+  
+    *  Booking reference
+    *  Booking holder
+    *  Booking paxes
+    *  Hotel, rooms and boards confirmed
+    *  Booking rates
+    
+  The results are returned in a paginated response that can be filtered with the use of parameters in the request.
+  
+  Timeout for this operation is 60 seconds.
+  
+  
+  Equivalent to GET /bookings
+  """
+  bookingListRS(
+    """Response format."""
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    Parameter to filter the result by the __clientReference__ field of the booking.
+    """
+    clientReference: String
+    """Defines request format."""
+    contentType: ContentType!
+    """
+    Parameter to filter the results by the country code of the hotel. Can include multiple values separated by commas.
+    """
+    country: [String]
+    """
+    Parameter to filter the result by the creationUser field of the booking.
+    """
+    creationUser: String
+    """
+    Parameter to filter the results by the destination code of the hotel. Can include multiple values separated by commas.
+    """
+    destination: [String]
+    """
+    Defines the ending date of the range of bookings to be returned. value.
+    """
+    end: String!
+    """
+    Parameter used to define wether **start** and **end** fields are filtering by check-in date or by booking creation date.
+    """
+    filterType: FilterType
+    """Defines the lowest value of the range of bookings to be returned."""
+    from: Int!
+    """
+    Parameter to filter the results by the hotel codes. Can include multiple values separated by commas.
+    """
+    hotel: [Int]
+    """Defines the starting date of the range of bookings to be returned."""
+    start: String!
+    """
+    Parameter used to filter results by status. Can be used to include or exclude cancelled bookings.
+    """
+    status: Status3
+    """Defines the highest value of the range of bookings to be returned."""
+    to: Int!
+  ): BookingListRS
+  """
+  The Reconfirmation operation allows to retrieve the reconfirmation numbers (The confirmation number of the Hotel, both for the Hotelbeds product and for that of external suppliers product) of the bookings made by the client when requested in a GET call to our endpoint.
+  
+  Obtaining this reconfirmation numbers from hoteliers is an __asynchronous__ service: **reconfirmation numbers are not available at the time of the booking**, and as such they can't be informed at the time of the booking, hence the need for this operation.
+  
+  The Reconfirmation operation offers a wide variety of filters to help narrowing down reconfirmation number results. Only one filter can be used at the same time. Below the four possible filters you can use:
+  
+  * between two cheking dates
+  * between two reconfirmation dates
+  * list of clientReference ids
+  * list of booking Ids
+  
+  ## Reconfirmation Service
+  
+  Additionally we offer you the capacity to receive the reconfirmation numbers automatically in our reconformation service, designed to automatically send you the reconfirmation information as soon as is available from the hoteliers in two different ways:
+  
+  * [Push Service](/documentation/hotels/booking-api/reconfirmation-service/push-service/) : The messages will be automatically sent in JSON format to an endpoint of your choice.
+  * [Email Service](/documentation/hotels/booking-api/reconfirmation-service/email-service/): The messages will be automatically sent in an email to an address of your choice.
+  
+  Contact our support team at [apitude@hotelbeds.com]() to learn more about this features.
+  
+  Equivalent to GET /bookings/reconfirmations
+  """
+  bookingReconfirmation(
+    """Response format."""
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    Parameter to filter the results by the booking reference in client API side.Can include multiple values separated by ",". Max 80 values.
+    """
+    clientReferences: [String]
+    """
+    Date to when the method will finish checking reconfirmation numbers. The format must be YYYY-MM-DD. In case of using __start__ and __end__ parameters, the use of __filterType__ parameter is mandatory.
+    """
+    end: String
+    """
+    The parameter is used to identify if the reconfirmation numbers is by check-in date or by reconfirmation date. Values:
+    
+    * CHECKIN: for the check-in date.
+    * RECONFIRMATION: for the reconfirmation date the booking was included in Hotelbeds systems.
+    
+    In case of using __filterType__ parameters, the use of __start__ and __end__ parameters is mandatory.
+    """
+    filterType: FilterType2
+    """
+    Lowest value of the range of bookings with supplierConfirmationCodes to be returned (as in a paginated response).
+    """
+    from: Int!
+    """
+    Parameter to filter the results by the booking reference in Hotelbeds side.Can include multiple values separated by ",". Max 80 values.
+    """
+    references: [String]
+    """
+    Date from when the method will start checking reconfirmation numbers. The format must be YYYY-MM-DD. In case of using __start__ and __end__ parameters, the use of __filterType__ parameter is mandatory.
+    """
+    start: String
+    """
+    Highest value of the range of bookings with supplierConfirmationCodes to be returned (as in a paginated response).
+    """
+    to: Int!
+  ): BookingReconfirmation
+}
+
+"""Response of BookingDetail operation."""
+type BookingDetailRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData!
+  """The Booking object. Contains all data related with the booking itself."""
+  booking: ApiBooking
+  echoToken: String
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiError
+}
+
+"""Relevant internal information."""
+type ApiAuditData {
+  """Environment where the request has been sent and processed."""
+  environment: String
+  """Server process time in milliseconds."""
+  processTime: String
+  """Release version identifier."""
+  release: String
+  """IP address of the system host."""
+  requestHost: String
+  """Server code or ID (for internal use)."""
+  serverId: String
+  """
+  Date/time when the request has been processed (always in Spanish time).
+  """
+  timestamp: String
+  """Token identifier of the operation."""
+  token: String
+}
+
+"""The Booking object. Contains all data related with the booking itself."""
+type ApiBooking {
+  agCommision: Float
+  """Unique cancellation reference. Only appears for cancelled bookings."""
+  cancellationReference: String
+  """Client internal booking reference."""
+  clientReference: String
+  """Share of the commission corresponding to the Value Added Tax."""
+  commisionVAT: Float
+  """Booking creation date."""
+  creationDate: String
+  """The apiKey used to create the booking."""
+  creationUser: String
+  """Currency of the monetary amount."""
+  currency: String
+  """Information of the holder of the booking."""
+  holder: ApiHolder
+  """Information about an hotel and its associated room rates."""
+  hotel: ApiHotel
+  """Information about the invoice company."""
+  invoiceCompany: ApiReceptive
+  """Information regarding the allowed modifications to the booking."""
+  modificationPolicies: ApiModificationPolicies
+  """Remaining amount to be paid."""
+  pendingAmount: Float
+  """Booking locator. Format: XXXXXXXX-XXXXXXXX"""
+  reference: String
+  """
+  Free text that is sent to the hotelier as a comment from the client. It can be used to request or inform of special requests to hotelier like: Non-smoking room preferred, Twin bed please, Upper floor preferred, Late arrival.
+  """
+  remark: String
+  """Current status of the booking."""
+  status: Status2
+  """Total amount of the booking."""
+  totalNet: Float
+  """
+  Total amount of the booking in hotelCurrency (for the pay at hotel model).
+  """
+  totalSellingRate: Float
+}
+
+"""Information of the holder of the booking."""
+type ApiHolder {
+  """Booking holder name for all the rooms of the booking."""
+  name: String!
+  """Booking holder surname for all rooms of the booking."""
+  surname: String!
+}
+
+"""Information about an hotel and its associated room rates."""
+type ApiHotel {
+  cancellationAmount: Float
+  """Hotelbeds code of the hotel category."""
+  categoryCode: String
+  """Name of the hotel category."""
+  categoryName: String
+  """Check-in date."""
+  checkIn: String
+  """Check-out date."""
+  checkOut: String
+  clientComments: String
+  """Hotelbeds internal hotel code."""
+  code: Int
+  """
+  List of credit cards accepted by the hotel for Liberate model (pay at hotel).
+  """
+  creditCards: [ApiCreditCard]
+  """Client currency."""
+  currency: String
+  """Hotel description."""
+  description: String
+  """Code of the destination of the hotel location."""
+  destinationCode: String
+  """Name of the destination of the hotel location."""
+  destinationName: String
+  """
+  The value follows a qualitative scale, the number 1 being always the top priority/preferential, and the rest of the product defined by our commercial departments. As of today, the possible values are:
+    1: Identifies preferential product with exclusive guaranteed availability.
+    2: Identifies top hotels.
+    3: Identifies the rest of hotels.
+    In case new values are added in the future, a proper communication campaign will be carried out to inform you.
+  
+  """
+  exclusiveDeal: Int
+  keywords: [ApiKeyword]
+  """Latitude coordinate of the hotel location."""
+  latitude: String
+  """Longitude coordinate of the hotel location."""
+  longitude: String
+  """Maximum hotel room price."""
+  maxRate: Float
+  """Minimum hotel room price."""
+  minRate: Float
+  """Name of the hotel."""
+  name: String
+  """
+  Indicates the need for payment data(i.e.: credit card details) in order to finish the booking.
+  """
+  paymentDataRequired: Boolean
+  """Remaining amount to be paid."""
+  pendingAmount: Float
+  reviews: [ApiReview]
+  rooms: [Room2]
+  """Supplier information."""
+  supplier: ApiSupplier
+  """Total amount of the booking."""
+  totalNet: Float
+  """
+  Total amount of the booking in hotelCurrency (for the pay at hotel model).
+  """
+  totalSellingRate: Float
+  """
+  Additional room options with superior category available at the same hotel that was requested.
+  """
+  upselling: ApiUpselling
+  """Code of the zone of the hotel location."""
+  zoneCode: Int
+  """Name of the zone of the hotel location."""
+  zoneName: String
+}
+
+"""Information on the accepted credit card."""
+type ApiCreditCard {
+  """Credit card code."""
+  code: String
+  """Credit card name."""
+  name: String
+  """Hotel paymentType in which card is accepted."""
+  paymentType: PaymentType2
+}
+
+enum PaymentType2 {
+  AT_HOTEL
+  AT_WEB
+}
+
+"""Code of the keyword associated with the hotel."""
+type ApiKeyword {
+  """Keyword code."""
+  code: Int!
+  rating: Int
+}
+
+"""Reviews of the hotel."""
+type ApiReview {
+  """Rating value."""
+  rate: Float
+  """Total number of ratings for that particular hotel."""
+  reviewCount: Int
+  """Source of the review. Posible values: TRIPADVISOR, HOTELBEDS."""
+  type: String
+}
+
+"""Information about the room and its associated rates."""
+type Room2 {
+  """Internal room code."""
+  code: String
+  """Room reservation identifier."""
+  id: Int
+  """Room name/description."""
+  name: String
+  """List of paxes for the room."""
+  paxes: [ApiPax]
+  """List of rates associated to the room."""
+  rates: [ApiRate]
+  """Booking status of the room."""
+  status: Status
+  """Booking reference of the booking/room for external supplier bookings."""
+  supplierReference: String
+}
+
+"""Passenger information."""
+type ApiPax {
+  """Age of the passenger (required for children passengers)."""
+  age: Int
+  """Name of the passenger."""
+  name: String
+  roomId: Int
+  """Surname of the passenger."""
+  surname: String
+  """Passenger type, defines if the passenger is adult or child."""
+  type: Type2!
+}
+
+enum Type2 {
+  AD
+  CH
+}
+
+"""Definition of a rate."""
+type ApiRate {
+  """Number of adults requested for each room."""
+  adults: Int
+  """Number of rooms available for a particular room type."""
+  allotment: Int
+  """Internal board code."""
+  boardCode: String
+  """Board name/description."""
+  boardName: String
+  """Brand of the hotel."""
+  brand: String
+  """List of cancellation policies on the rate."""
+  cancellationPolicies: [ApiCancellationPolicy]
+  """Number of children requested for each room."""
+  children: Int
+  """Ages of the children (if any)."""
+  childrenAges: String
+  """Profit margin the agency takes (commissionable model)."""
+  commission: Float
+  """Percentual share of the price corresponding to commision."""
+  commissionPCT: Float
+  """Share of the commission corresponding to the Value Added Tax."""
+  commissionVAT: Float
+  """Breakdown of the rate for each day of the stay."""
+  dailyRates: [ApiDailyRate]
+  """
+  Profit margin that the agency would take if it sells at that recommended price.
+  """
+  discount: Float
+  """
+  Percentual share of the price corresponding to the profit margin the agency would take if it sells at that recommended price.
+  """
+  discountPCT: Float
+  """Hotel currency(for the pay at hotel model)."""
+  hotelCurrency: String
+  """Identifies if the rate price is recommended."""
+  hotelMandatory: Boolean
+  """Gross price of the room in hotelCurrency(for the pay at hotel model)."""
+  hotelSellingRate: Float
+  """Net price of the rate."""
+  net: Float
+  """List of offers on the rate."""
+  offers: [ApiOffer]
+  """Defines if the rate is for packaging."""
+  packaging: Boolean
+  """Defines the type of payment accepted."""
+  paymentType: PaymentType
+  """List of promotions on the rate."""
+  promotions: [ApiPromotion]
+  """Breakdown of the rate."""
+  rateBreakDown: ApiRateBreakDown
+  """Class of the rate."""
+  rateClass: String
+  """Rate comments that contain important information."""
+  rateComments: String
+  """
+  Comments associated to this rate (more information on [Hotel Content API](/documentation/hotels/content-api/api-reference/) ).
+  """
+  rateCommentsId: String
+  """
+  Internal key that represents a combination of room type, category, board and occupancy. Is returned in Availability and used to valuate a rate and confirm a booking.
+  """
+  rateKey: String
+  """
+  Determines if can booked directly (BOOKABLE) or if it needs to be checked with the â€˜CheckRateâ€™ operation (RECHECK).
+  """
+  rateType: RateType
+  """Difference between original rate price and upselling rate price."""
+  rateup: Float
+  """
+  Indicates if the rate is only for residents (only appears when resident rates are requested).
+  """
+  resident: Boolean
+  """Number of rooms requested."""
+  rooms: Int
+  """Gross price of the room in case it is included."""
+  sellingRate: Float
+  """Information about rates for alternative dates."""
+  shiftRates: [ApiShiftRate]
+  """Information of taxes."""
+  taxes: ApiTaxes
+}
+
+"""
+Set of rules that define the penalty the client will receive if the cancellation of a booking is made after a given date.
+"""
+type ApiCancellationPolicy {
+  """
+  Penalty that will be charged for cancellations after the indicated date, represented as a monetary amount.
+  """
+  amount: Float
+  """
+  Date from which the penalties are applied in ISO 8601 format (yyyy-MM-ddTHH:mm:ssZ).
+  """
+  from: String
+  """
+  Penalty that will be charged for cancellations after the indicated date, represented as a monetary amount, provided in hotel currency (for the pay at hotel model).
+  """
+  hotelAmount: Float
+  """
+  Currency in which the cancellation penalties must be paid (for the pay at hotel model).
+  """
+  hotelCurrency: String
+  """
+  Penalty that will be applied for cancellations after the indicated date, represented as a number of nights.
+  """
+  numberOfNights: Float
+  """
+  Penalty that will be charged for cancellations after the indicated date, represented as a monetary amount, represented as a percentage of the total amount of the booking.
+  """
+  percent: Float
+}
+
+"""Rate for a specific day of the stay."""
+type ApiDailyRate {
+  """Net price per day."""
+  dailyNet: Float
+  """Room selling price per day."""
+  dailySellingRate: Float
+  """Day number of the stay for which the breakdown is made."""
+  offset: Int
+}
+
+"""Offer information."""
+type ApiOffer {
+  """
+  Monetary amount deducted by the offer. NOTE: This deduction is already applied to the final price.
+  """
+  amount: Float
+  """Code of the offer."""
+  code: String
+  """Short name/description of the offer."""
+  name: String
+}
+
+enum PaymentType {
+  AT_HOTEL
+  AT_WEB
+}
+
+"""Promotion information."""
+type ApiPromotion {
+  """Code of the promotion."""
+  code: String
+  """Short name/description of the promotion."""
+  name: String
+  """Additional information regarding the promotion."""
+  remark: String
+}
+
+"""Breakdown of the rate."""
+type ApiRateBreakDown {
+  """Information on discounts for the rate."""
+  rateDiscounts: [ApiRateDiscount]
+  """Information on supplements for the rate."""
+  rateSupplements: [ApiRateSupplement]
+}
+
+"""Information describing a discount on a rate."""
+type ApiRateDiscount {
+  """
+  Monetary deducted by the discount NOTE: This deduction is already applied to the final price.
+  """
+  amount: Float
+  """Code of the discount."""
+  code: String
+  """Discount name/description."""
+  name: String
+}
+
+"""Information describing a supplement on a rate."""
+type ApiRateSupplement {
+  """Amount of the supplement."""
+  amount: Float
+  """Internal code of the supplement."""
+  code: String
+  """Date from which the discount is applied."""
+  from: String
+  """Name/description of the supplement."""
+  name: String
+  """Number of nights for which the supplement applies."""
+  nights: Int
+  """Number of paxes that are affected by the supplement."""
+  paxNumber: Int
+  """Date when the discount ends."""
+  to: String
+}
+
+enum RateType {
+  BOOKABLE
+  RECHECK
+}
+
+"""
+Definition of a rate for an alternative date to the one used in the availability request.
+"""
+type ApiShiftRate {
+  """Number of rooms available for a particular room type."""
+  allotment: Int
+  """Brand of the hotel."""
+  brand: String
+  """
+  CheckIn date for the shift rate. This will always be different than the requested date or the dates of the not alternative rates.
+  """
+  checkIn: String
+  """
+  CheckIn date for the shift rate. This will always be different than the requested date or the dates of the not alternative rates.
+  """
+  checkOut: String
+  """Profit margin the agency takes (commissionable model)."""
+  commission: Float
+  """Percentual share of the price corresponding to commision."""
+  commissionPCT: Float
+  """Share of the commission corresponding to the Value Added Tax."""
+  commissionVAT: Float
+  """
+  Profit margin that the agency would take if it sells at that recommended price.
+  """
+  discount: Float
+  """
+  Percentual share of the price corresponding to the profit margin the agency would take if it sells at that recommended price.
+  """
+  discountPCT: Float
+  """Hotel currency(for the pay at hotel model)."""
+  hotelCurrency: String
+  """Identifies if the rate price is recommended."""
+  hotelMandatory: Boolean
+  """Gross price of the room in hotelCurrency(for the pay at hotel model)."""
+  hotelSellingRate: Float
+  """Net price of the rate."""
+  net: Float
+  """Class of the rate."""
+  rateClass: String
+  """
+  Internal key that represents a combination of room type, category, board and occupancy. Is returned in Availability and used to valuate a rate and confirm a booking.
+  """
+  rateKey: String
+  """
+  Determines if can booked directly (BOOKABLE) or if it needs to be checked with the â€˜CheckRateâ€™ operation (RECHECK).
+  """
+  rateType: RateType
+  """
+  Indicates if the rate is only for residents (only appears when resident rates are requested).
+  """
+  resident: Boolean
+  """Gross price of the room in case it is included."""
+  sellingRate: Float
+}
+
+"""Information of taxes."""
+type ApiTaxes {
+  """Indicates if all taxes are included or not."""
+  allIncluded: Boolean
+  """
+  "margin": This is an indirect tax regime for travel agencies where split of taxes is not shown in the invoices. In this case, the customer could not deduct any taxes even if the final customer is a legal entity with the right of deduction for indirect taxes. "general": This is the indirect tax regime where the split of taxes is shown in the invoices. In this case, the booking will be invoiced with split of taxes and the customer could be able to deduct the VAT and in some countries, these taxes are reduced rates. This tax scheme offers tax advantage for business customers with the right of deduction for indirect taxes.
+  """
+  taxScheme: TaxScheme
+  """List of taxes."""
+  taxes: [ApiTax]
+}
+
+enum TaxScheme {
+  MARGIN
+  GENERAL
+}
+
+"""Tax information."""
+type ApiTax {
+  """
+  Value of the tax in hotel currency if the tax is not included in the price.
+  """
+  amount: Float
+  """Net amount of the tax in the client configured currency."""
+  clientAmount: Float
+  """Client configured currency."""
+  clientCurrency: String
+  """Currency of the tax amount."""
+  currency: String
+  """Indicates if the tax is included in the price or not."""
+  included: Boolean
+  """Value of the tax as a percentage."""
+  percent: Float
+  """Type of the tax."""
+  type: Type3
+}
+
+enum Type3 {
+  TAX
+  FEE
+  TAXESANDFEES
+}
+
+enum Status {
+  NEW
+  PRECONFIRMED
+  CONFIRMED
+  TO_BE_UPDATED
+  CANCELLED
+  TO_BE_CANCELLED
+}
+
+"""Supplier information."""
+type ApiSupplier {
+  """Supplier name."""
+  name: String
+  """Supplier VAT number."""
+  vatNumber: String
+}
+
+"""
+Additional room options with superior category available at the same hotel that was requested.
+"""
+type ApiUpselling {
+  """List of available rooms with superior category."""
+  rooms: [Room2]
+}
+
+"""Information about the invoice company."""
+type ApiReceptive {
+  """Code of the invoice company."""
+  code: String
+  """Name of the invoice company."""
+  name: String
+  """Registration number of the invoice company."""
+  registrationNumber: String
+}
+
+"""Information regarding the allowed modifications to the booking."""
+type ApiModificationPolicies {
+  """Indicates if the booking allows cancellation."""
+  cancellation: Boolean!
+  """Indicates if the booking allows modification."""
+  modification: Boolean!
+}
+
+enum Status2 {
+  PRECONFIRMED
+  CONFIRMED
+  CANCELLED
+}
+
+"""
+Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+"""
+type ApiError {
+  """Internal token code of the error."""
+  code: String!
+  """Descriptive message of the cause of the error."""
+  message: String
+}
+
+enum Accept {
+  APPLICATION_JSON
+  APPLICATION_XML
+}
+
+"""Response of BookingList operation."""
+type BookingListRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData!
+  """List of bookings and related information."""
+  bookings: ApiBookingsList
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiError
+}
+
+"""List of bookings and related information."""
+type ApiBookingsList {
+  """List of returned bookings matching the parameters used in the request."""
+  bookings: [ApiBookingList]
+}
+
+"""The Booking object. Contains all data related with the booking itself."""
+type ApiBookingList {
+  """Client internal booking reference."""
+  clientReference: String
+  """Booking creation date."""
+  creationDate: String
+  """The apiKey used to create the booking."""
+  creationUser: String
+  """Currency of the monetary amount."""
+  currency: String
+  """Information of the holder of the booking."""
+  holder: ApiHolder
+  """Information about an hotel and its associated room rates."""
+  hotel: ApiHotelBookingList
+  """Information about the invoice company."""
+  invoiceCompany: ApiReceptive
+  """Remaining amount to be paid."""
+  pendingAmount: Float
+  """Booking locator. Format: XXXXXXXX-XXXXXXXX"""
+  reference: String
+  """Current status of the booking."""
+  status: Status2
+  """Total amount of the booking."""
+  totalNet: Float
+  """
+  Total amount of the booking in hotelCurrency (for the pay at hotel model).
+  """
+  totalSellingRate: Float
+}
+
+"""Information about an hotel and its associated room rates."""
+type ApiHotelBookingList {
+  cancellationAmount: Float
+  """Check-in date."""
+  checkIn: String
+  """Check-out date."""
+  checkOut: String
+  """Hotelbeds internal hotel code."""
+  code: Int
+  """Code of the destination of the hotel location."""
+  destinationCode: String
+  """Name of the hotel."""
+  name: String
+  rooms: [RoomBookingList]
+}
+
+"""Information about the room and its associated rates."""
+type RoomBookingList {
+  """Internal room code."""
+  code: String
+  """Room reservation identifier."""
+  id: Int
+  """List of paxes for the room."""
+  paxes: [ApiPax]
+  """List of rates associated to the room."""
+  rates: [ApiRateBookingList]
+  """Booking status of the room."""
+  status: Status
+}
+
+"""Definition of a rate."""
+type ApiRateBookingList {
+  """Amount of the rate."""
+  amount: Float
+  """Internal board code."""
+  boardCode: String
+  """Defines the type of payment accepted."""
+  paymentType: PaymentType
+  """Number of rooms requested."""
+  rooms: Int
+}
+
+enum ContentType {
+  APPLICATION_JSON
+  APPLICATION_XML
+}
+
+enum FilterType {
+  CHECKIN
+  CREATION
+}
+
+enum Status3 {
+  ALL
+  CONFIRMED
+  CANCELLED
+}
+
+"""Response of BookingReconfirmation operation."""
+type BookingReconfirmation {
+  """Relevant internal information."""
+  auditData: ApiAuditData
+  """Response of BookingReconfirmationList operation."""
+  bookings: [Bookings2ListItem]
+}
+
+"""Response of BookingReconfirmationObj operation."""
+type Bookings2ListItem {
+  """Client internal booking reference."""
+  clientReference: String
+  hotel: Hotel2
+  """Booking locator. Format: XXXXXXXX-XXXXXXXX"""
+  reference: String
+}
+
+type Hotel2 {
+  rooms: [Rooms13ListItem]
+}
+
+type Rooms13ListItem {
+  """Internal room code."""
+  code: String
+  """Room reservation identifier."""
+  id: Int
+  supplierConfirmationCode: [String]
+}
+
+enum FilterType2 {
+  CHECKIN
+  RECONFIRMATION
+}
+
+type Mutation {
+  """
+  This method is used to request **room availability**. Some
+  filters and special features can be applied before sending an availability
+  request.
+  
+  A flexible date search allows customers to retrieve available
+  rates for a specified number of days prior to and post check-in.
+  
+  The response generated is a list of hotels with the different room types, board
+  types, and rates available for those hotels, but not only restricted to the
+  dates selected.
+  
+  BookingAPI prices are final. Our rates include supplements
+  and discounts and no additional price calculations are required. 
+  
+  It can also return cancellation fees in the availability response, providing
+  amounts and dates at the first step of the booking.
+  
+  Timeout for this operation is 5 seconds.
+  
+  
+  Equivalent to POST /hotels
+  """
+  availability(
+    """Response format."""
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """Request of Availability operation."""
+    availabilityRQInput: AvailabilityRQInput!
+    """Defines request format."""
+    contentType: ContentType!
+  ): AvailabilityRS
+  """
+  The Booking operation requests a reservation confirmation for the specified ratekey or ratekeys.
+  
+  BookingAPI does not support on-request confirmations. All confirmations are instant confirmations.
+  
+  Timeout for this operation is 60 seconds.
+  
+  Equivalent to POST /bookings
+  """
+  booking(
+    """Response format."""
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """Request of Booking operation."""
+    bookingRQInput: BookingRQInput!
+    """Defines request format."""
+    contentType: ContentType!
+  ): BookingRS
+  """
+  BookingCancellation is used either to simulate a cancellation or to perform the actual cancellation.Cancellations always take into account day and time of the destination in order to calculate what cancellation policy should be applied.
+  Timeout for this operation is 60 seconds.
+  
+  Equivalent to DELETE /bookings/{bookingId}
+  """
+  bookingCancellation(
+    """Response format."""
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """
+    Booking reference number taken from the confirmation response or from the booking list function.  Format: XXX-YYYYYY
+    """
+    bookingId: String!
+    """Type of cancellation method to be used."""
+    cancellationFlag: CancellationFlag
+    """
+    Language in which the description texts will be returned in the response
+    """
+    language: String
+  ): BookingCancellationRS
+  """
+  The BookingChange operation is used to change or update different values of a booking.
+  
+  The changes that can be performed are:
+  
+  * Change clientReference
+  * Change remarks
+  * Change holder name and surname
+  * Change checkIn and checkOut date
+  * Change board plans
+  * Change passengers name and surname
+  * Add rooms (only from the same type already in the booking)
+  * Remove rooms from a booking (partial cancellation)
+  
+  
+  Equivalent to PUT /bookings/{bookingId}
+  """
+  bookingChange(
+    """Response format."""
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """Request of BookingChange operation."""
+    bookingChangeRQInput: BookingChangeRQInput!
+    """
+    Booking reference number taken from the confirmation response or from the booking list function. Format: XXX-YYYYYY
+    """
+    bookingId: String!
+    """Defines request format."""
+    contentType: ContentType!
+  ): BookingChangeRS
+  """
+  CheckRate is an _optional_ operation used to assess and valuate the rate before the actual booking. CheckRate returns the same information as the Availability response for a hotel rate with up-to-date price, along with additional information regarding the rate: rate breakdown, rate comments and upselling options.
+  
+  The CheckRate method can complement the booking process, as it returns additional information to the availability request. However, when the rateType value is 'RECHECK', the CheckRate method is mandatory.
+  
+  Besides the details for the rate, CheckRate has the option to also return information of higher rates of the same hotel being checked. This is called Upselling.
+  
+  Upselling returns additional room options, each with its own rate key, allowing you to upgrade the stay quality in room category and rate plan even after the CheckRate operation has been performed.
+  
+  Timeout for this operation is 15 seconds.
+  
+  
+  Equivalent to POST /checkrates
+  """
+  checkRate(
+    """Response format."""
+    accept: Accept!
+    """Defines type of encoding used on the data."""
+    acceptEncoding: String
+    """Request of CheckRate operation."""
+    checkRateRQInput: CheckRateRQInput!
+    """Defines request format."""
+    contentType: ContentType!
+  ): CheckRateRS
+}
+
+"""Response of Availability operation."""
+type AvailabilityRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData!
+  echoToken: String
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiError
+  """Hotel availability information."""
+  hotels: ApiHotels
+}
+
+"""Hotel availability information."""
+type ApiHotels {
+  """Check-in date in the current availability response."""
+  checkIn: String
+  """Check-out date in the current availability response."""
+  checkOut: String
+  """Information regarding the hotels."""
+  hotels: [ApiHotel]
+  """Total of hotels returned in the current availability response."""
+  total: Int
+}
+
+"""Request of Availability operation."""
+input AvailabilityRQInput {
+  """Filter for accomodation type."""
+  accommodations: [String]
+  """
+  Tags the request for CacheAPI users (NOTE: MANDATORY for this users when filtering by contract).
+  """
+  aifUse: Boolean
+  """Filter for board types."""
+  boards: ApiBoardsInput
+  """Displays price breakdown per each day of the hotel stay."""
+  dailyRate: Boolean
+  """Filters to limit Availability results by particular values."""
+  filter: ApiFilterInput
+  """Defines the geolocation data for hotel search."""
+  geolocation: ApiGeoLocationInput
+  """Defines the list of hotels for hotel search."""
+  hotels: ApiHotelsFilterInput
+  """
+  Includes additional rates that are normally not exposed in the Availability results. NOTE: Be aware that inclusions are not filters and as such all of the regular rates are returned with the normally not included ones.
+  """
+  inclusions: [InclusionsListItem]
+  """Filter by codes of keywords associated to hotels."""
+  keywords: ApiKeywordsFilterInput
+  """
+  Language code that defines the language of the response. English will be used by default if this field is not informed.
+  """
+  language: String
+  """List of passenger groups for which to request availability."""
+  occupancies: [ApiOccupancyInput]!
+  """Defines the platform for multiclient developer platforms."""
+  platform: Int
+  """Filter for review rating."""
+  review: [ApiReviewFilterInput]
+  """Filter for room types."""
+  rooms: ApiRoomsInput
+  """Hotelbeds Group client source market."""
+  sourceMarket: String
+  """Defines the time of the stay at the hotel."""
+  stay: ApiStayInput!
+}
+
+"""Filter for board types."""
+input ApiBoardsInput {
+  """
+  List of board type codes to filter by. You can get all the possible board type code values through the board types operation of [Hotel Content API](/documentation/hotels/content-api/api-reference/).
+  """
+  board: [String]!
+  """Includes or excludes the listed board types from the response."""
+  included: Boolean!
+}
+
+"""Filters to limit Availability results by particular values."""
+input ApiFilterInput {
+  """
+  Filters the results by the contract requested. (NOTE: when using this filter is mandatory to inform availabilityRQ/@aifUse attribute)
+  """
+  contract: String
+  """
+  Includes or excludes hotel packages (packages created by Hotelbeds that include another product together with the hotel accomodation: massages, tickets, etc.).
+  """
+  hotelPackage: HotelPackage
+  """Filter for maximum hotel category."""
+  maxCategory: Int
+  """
+  Filter for maximum number of hotels you want to receive in the response.
+  """
+  maxHotels: Int
+  """Filter for maximum hotel room price."""
+  maxRate: Float
+  """Filter for maximum number of rates per room."""
+  maxRatesPerRoom: Int
+  """Filter for maximum number of rooms you want to receive for each hotel."""
+  maxRooms: Int
+  """Filter for minimun hotel category."""
+  minCategory: Int
+  """Filter for minimum hotel room price."""
+  minRate: Float
+  """
+  Includes or excludes package rates in the response. Package rates are excluded by default if this is not informed.
+  """
+  packaging: Boolean
+}
+
+enum HotelPackage {
+  YES
+  NO
+  BOTH
+}
+
+"""Defines the geolocation data for hotel search."""
+input ApiGeoLocationInput {
+  """Latitude coordinate for geolocation search."""
+  latitude: Float!
+  """Longitude coordinate for geolocation search."""
+  longitude: Float!
+  """Radius size for circular search."""
+  radius: Float
+  """
+  Latitude coordinate for geolocation search for rectangle search. Determines bottom right point of the search area.
+  """
+  secondaryLatitude: Float
+  """
+  Longitude coordinate for geolocation search for rectangle search. Determines bottom right point of the search area.
+  """
+  secondaryLongitude: Float
+  """Distance unit for the radius."""
+  unit: Unit
+}
+
+enum Unit {
+  MI
+  KM
+}
+
+"""Defines the list of hotels for hotel search."""
+input ApiHotelsFilterInput {
+  """List of codes of the requested hotels."""
+  hotel: [Int]!
+}
+
+enum InclusionsListItem {
+  RESIDENT_RATES
+}
+
+"""Filter by codes of keywords associated to hotels."""
+input ApiKeywordsFilterInput {
+  """Defines if the results must match all the indicated keyword codes."""
+  allIncluded: Boolean
+  """List of keyword codes to filter."""
+  keyword: [Int]
+}
+
+"""
+Definition of passengers groups and how they are distributed in different rooms.
+"""
+input ApiOccupancyInput {
+  """Number of adult passengers for this room."""
+  adults: Int!
+  """number of child passengers for this room."""
+  children: Int!
+  """Number of requested rooms of this occupancy."""
+  rooms: Int!
+}
+
+"""Filter hotels by rating and number of reviews."""
+input ApiReviewFilterInput {
+  """Maximum review rating you want the hotels to have."""
+  maxRate: Float
+  """Minimun review rating you want the hotels to have."""
+  minRate: Float
+  """Minimum number of reviews you want the hotels to have."""
+  minReviewCount: Int
+  """Defines the source of the reviews."""
+  type: Type!
+}
+
+enum Type {
+  TRIPADVISOR
+  HOTELBEDS
+}
+
+"""Filter for room types."""
+input ApiRoomsInput {
+  """Includes or excludes the listed room types from the response."""
+  included: Boolean!
+  """
+  List of room type codes to filter by. You can get all the possible room type code values through the room types operation of [Hotel Content API](/documentation/hotels/content-api/api-reference/).
+  """
+  room: [String]!
+}
+
+"""Defines the time of the stay at the hotel."""
+input ApiStayInput {
+  """
+  Defines if results are returned for shiftDays even if there's no results for the searched dates.
+  """
+  allowOnlyShift: Boolean
+  """Check-in date."""
+  checkIn: String!
+  """Check-out date."""
+  checkOut: String!
+  """
+  Amount of days after and before the check-in to check availability, keeping the same stay duration.
+  """
+  shiftDays: Int
+}
+
+"""Response of Booking operation."""
+type BookingRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData!
+  """The Booking object. Contains all data related with the booking itself."""
+  booking: ApiBooking
+  echoToken: String
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiError
+}
+
+"""Request of Booking operation."""
+input BookingRQInput {
+  """Internal booking reference."""
+  clientReference: String!
+  """
+  Identifies the agent name of the booking. If empty, by default it will be the same than the apikey performing the booking .
+  """
+  creationUser: String
+  echoToken: String
+  """Information of the holder of the booking."""
+  holder: ApiHolderInput!
+  """
+  Language code that defines the language of the response. English will be used by default if this field is not informed.
+  """
+  language: String
+  """
+  Payment information. This is mandatory for rates with paymentType='AT_HOTEL' or for accounts setup as credit card payment.
+  """
+  paymentData: ApiPaymentDataInput
+  """
+  Free text sent to the hotelier. It can be used to request or inform of special requests to hotelier like: Non-smoking room preferred, Twin bed please, Upper floor preferred, Late arrival.
+  """
+  remark: String
+  """List of the rooms to be included in the booking."""
+  rooms: [ApiBookingRoomInput]
+  """
+  Margin of price difference (as percentage) accepted when a price difference occurs between Availability/CheckRate and Booking operations. Do not use more than two decimal characters when defining tolerance. Example: to input a tolerance of 5%, you should input 5.00.  NOTE: Authorisation for the use of this tag is subject to prior written agreement with your sales manager
+  """
+  tolerance: Float
+  """Booking voucher information."""
+  voucher: ApiVoucherInput
+}
+
+"""Information of the holder of the booking."""
+input ApiHolderInput {
+  """Booking holder name for all the rooms of the booking."""
+  name: String!
+  """Booking holder surname for all rooms of the booking."""
+  surname: String!
+}
+
+"""
+Payment information. This is mandatory for rates with paymentType='AT_HOTEL' or for accounts setup as credit card payment.
+"""
+input ApiPaymentDataInput {
+  """
+  The billing address of your credit card. Mandatory for clients with AVS or other fraud detection mechanisms activated. Please contact apitude@hotelbeds.com to know if you must provide this data or not. Normally this is enabled only for clients using the end user's credit card.
+  """
+  billingAddress: ApiBillingAddressInput
+  """Contact data for billing."""
+  contactData: ApiPaymentContactDataInput!
+  """
+  Defines the device where the booking was made. Mandatory only payments done with the end user's credit card.
+  """
+  device: ApiBookingDeviceInput
+  """Credit card information."""
+  paymentCard: ApiPaymentCardInput!
+  """Mandatory for clients based on Europe using European credit cards."""
+  threeDsData: ThreeDsDataInput
+  """
+  Identifies web partners bookings. Only required when using the end user's credit card.
+  """
+  webPartner: Int
+}
+
+"""
+The billing address of your credit card. Mandatory for clients with AVS or other fraud detection mechanisms activated. Please contact apitude@hotelbeds.com to know if you must provide this data or not. Normally this is enabled only for clients using the end user's credit card.
+"""
+input ApiBillingAddressInput {
+  """Address first line."""
+  address1: String!
+  """Address second line."""
+  address2: String
+  city: String!
+  """Code of the country."""
+  countryCode: String!
+  postalCode: String!
+  state: String
+}
+
+"""Contact data for billing."""
+input ApiPaymentContactDataInput {
+  """Email address."""
+  email: String!
+  """Telephone number."""
+  phoneNumber: String!
+}
+
+"""
+Defines the device where the booking was made. Mandatory only payments done with the end user's credit card.
+"""
+input ApiBookingDeviceInput {
+  """
+  Free field to identify the device. In the case of having an integration with Riskified, their token should be sent here.
+  """
+  id: String
+  """IP address of the end user."""
+  ip: String!
+  """useAgent of the end user's browser."""
+  userAgent: String!
+}
+
+"""Credit card information."""
+input ApiPaymentCardInput {
+  """CVC security code of the credit card."""
+  cardCVC: String!
+  """
+  Name of the credit card holder exactly as it appears on the credit card.
+  """
+  cardHolderName: String!
+  """Credit card number (without spaces)."""
+  cardNumber: String!
+  """Credit card type."""
+  cardType: CardType!
+  """Expiration date of the credit card;"""
+  expiryDate: String!
+}
+
+enum CardType {
+  AMEX
+  EURO6000
+  JCB
+  DINERS
+  MASTERCARD
+  VISA
+  MAESTRO
+  SWITCH
+  SOLO_GB
+  AIRPLUS
+  CHINAUNIONPAY
+  DISCOVER
+}
+
+"""Mandatory for clients based on Europe using European credit cards."""
+input ThreeDsDataInput {
+  """Provided ThreeDS structure"""
+  infoProvided: InfoProvidedInput
+  """Use PROVIDED if you have your own integration with a PSP"""
+  option: Option!
+  """This field contains the 3DS version used for authentication"""
+  version: String!
+}
+
+"""Provided ThreeDS structure"""
+input InfoProvidedInput {
+  """Cardholder Authentication Verification Value (CAVV)"""
+  cavv: String!
+  """
+  Electronic Commerce Indicator (ECI). The ECI value is part of the two data elements that indicate the transaction was processed electronically.
+  """
+  eci: String!
+  """Transaction identifier resulting from authentication processing."""
+  id: String!
+}
+
+enum Option {
+  PROVIDED
+  REQUESTED
+}
+
+"""Defines the room to be booked."""
+input ApiBookingRoomInput {
+  """Data of the passengers assigned to this room."""
+  paxes: [ApiPaxInput]
+  """
+  Internal key that represents a combination of room type, category, board and occupancy. Is returned in Availability and used to valuate a rate and confirm a booking.
+  """
+  rateKey: String!
+}
+
+"""Passenger information."""
+input ApiPaxInput {
+  """Age of the passenger (required for children passengers)."""
+  age: Int
+  """Name of the passenger."""
+  name: String
+  roomId: Int
+  """Surname of the passenger."""
+  surname: String
+  """Passenger type, defines if the passenger is adult or child."""
+  type: Type2!
+}
+
+"""Booking voucher information."""
+input ApiVoucherInput {
+  """Information regarding the email delivery of the voucher."""
+  email: ApiVoucherEmailInput
+  """
+  Language code that defines the language of the descriptions of the voucher. English will be used by default if this field is not informed.
+  """
+  language: String
+  """
+  Path of the picture you want to be featured in the header of the voucher as logo. Accepted formats: PNG, JPG, GIF & BMP. Max size: 100px x 100px. The filename part of the picture path cannot exceed 35 characters length.
+  """
+  logo: String
+}
+
+"""Information regarding the email delivery of the voucher."""
+input ApiVoucherEmailInput {
+  """Body of the voucher email."""
+  body: String
+  """
+  Email address that will appear as sender of the email. If not used, the default value is noreply@hotelbeds.com
+  """
+  from: String
+  """
+  Email subject. If not used, the default subject will have the following structure: Voucher - {{bookingReference}} - {{hotelName}}.
+  """
+  title: String
+  """
+  Email address to which the voucher will be sent. Only one address is allowed.
+  """
+  to: String
+}
+
+"""Response of BookingCancellation operation."""
+type BookingCancellationRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData!
+  """The Booking object. Contains all data related with the booking itself."""
+  booking: ApiBooking
+  echoToken: String
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiError
+}
+
+enum CancellationFlag {
+  CANCELLATION
+  SIMULATION
+}
+
+"""Response of BookingChange operation."""
+type BookingChangeRS {
+  """Relevant internal information."""
+  auditData: ApiAuditData!
+  """The Booking object. Contains all data related with the booking itself."""
+  booking: ApiBooking
+  echoToken: String
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiError
+}
+
+"""Request of BookingChange operation."""
+input BookingChangeRQInput {
+  """The Booking object. Contains all data related with the booking itself."""
+  booking: ApiBookingInput!
+  bookingId: String
+  """
+  Language code that defines the language of the response. English will be used by default if this field is not informed.
+  """
+  language: String
+  """
+  Defines if the operation will be a simulation or an actual modification.
+  """
+  mode: Mode!
+  """
+  Payment information. This is mandatory for rates with paymentType='AT_HOTEL' or for accounts setup as credit card payment.
+  """
+  paymentData: ApiPaymentDataInput
+}
+
+"""The Booking object. Contains all data related with the booking itself."""
+input ApiBookingInput {
+  agCommision: Float
+  """Unique cancellation reference. Only appears for cancelled bookings."""
+  cancellationReference: String
+  """Client internal booking reference."""
+  clientReference: String
+  """Share of the commission corresponding to the Value Added Tax."""
+  commisionVAT: Float
+  """Booking creation date."""
+  creationDate: String
+  """The apiKey used to create the booking."""
+  creationUser: String
+  """Currency of the monetary amount."""
+  currency: String
+  """Information of the holder of the booking."""
+  holder: ApiHolderInput
+  """Information about an hotel and its associated room rates."""
+  hotel: ApiHotelInput
+  """Information about the invoice company."""
+  invoiceCompany: ApiReceptiveInput
+  """Information regarding the allowed modifications to the booking."""
+  modificationPolicies: ApiModificationPoliciesInput
+  """Remaining amount to be paid."""
+  pendingAmount: Float
+  """Booking locator. Format: XXXXXXXX-XXXXXXXX"""
+  reference: String
+  """
+  Free text that is sent to the hotelier as a comment from the client. It can be used to request or inform of special requests to hotelier like: Non-smoking room preferred, Twin bed please, Upper floor preferred, Late arrival.
+  """
+  remark: String
+  """Current status of the booking."""
+  status: Status2
+  """Total amount of the booking."""
+  totalNet: Float
+  """
+  Total amount of the booking in hotelCurrency (for the pay at hotel model).
+  """
+  totalSellingRate: Float
+}
+
+"""Information about an hotel and its associated room rates."""
+input ApiHotelInput {
+  cancellationAmount: Float
+  """Hotelbeds code of the hotel category."""
+  categoryCode: String
+  """Name of the hotel category."""
+  categoryName: String
+  """Check-in date."""
+  checkIn: String
+  """Check-out date."""
+  checkOut: String
+  clientComments: String
+  """Hotelbeds internal hotel code."""
+  code: Int
+  """
+  List of credit cards accepted by the hotel for Liberate model (pay at hotel).
+  """
+  creditCards: [ApiCreditCardInput]
+  """Client currency."""
+  currency: String
+  """Hotel description."""
+  description: String
+  """Code of the destination of the hotel location."""
+  destinationCode: String
+  """Name of the destination of the hotel location."""
+  destinationName: String
+  """
+  The value follows a qualitative scale, the number 1 being always the top priority/preferential, and the rest of the product defined by our commercial departments. As of today, the possible values are:
+    1: Identifies preferential product with exclusive guaranteed availability.
+    2: Identifies top hotels.
+    3: Identifies the rest of hotels.
+    In case new values are added in the future, a proper communication campaign will be carried out to inform you.
+  
+  """
+  exclusiveDeal: Int
+  keywords: [ApiKeywordInput]
+  """Latitude coordinate of the hotel location."""
+  latitude: String
+  """Longitude coordinate of the hotel location."""
+  longitude: String
+  """Maximum hotel room price."""
+  maxRate: Float
+  """Minimum hotel room price."""
+  minRate: Float
+  """Name of the hotel."""
+  name: String
+  """
+  Indicates the need for payment data(i.e.: credit card details) in order to finish the booking.
+  """
+  paymentDataRequired: Boolean
+  """Remaining amount to be paid."""
+  pendingAmount: Float
+  reviews: [ApiReviewInput]
+  rooms: [Room2Input]
+  """Supplier information."""
+  supplier: ApiSupplierInput
+  """Total amount of the booking."""
+  totalNet: Float
+  """
+  Total amount of the booking in hotelCurrency (for the pay at hotel model).
+  """
+  totalSellingRate: Float
+  """
+  Additional room options with superior category available at the same hotel that was requested.
+  """
+  upselling: ApiUpsellingInput
+  """Code of the zone of the hotel location."""
+  zoneCode: Int
+  """Name of the zone of the hotel location."""
+  zoneName: String
+}
+
+"""Information on the accepted credit card."""
+input ApiCreditCardInput {
+  """Credit card code."""
+  code: String
+  """Credit card name."""
+  name: String
+  """Hotel paymentType in which card is accepted."""
+  paymentType: PaymentType2
+}
+
+"""Code of the keyword associated with the hotel."""
+input ApiKeywordInput {
+  """Keyword code."""
+  code: Int!
+  rating: Int
+}
+
+"""Reviews of the hotel."""
+input ApiReviewInput {
+  """Rating value."""
+  rate: Float
+  """Total number of ratings for that particular hotel."""
+  reviewCount: Int
+  """Source of the review. Posible values: TRIPADVISOR, HOTELBEDS."""
+  type: String
+}
+
+"""Information about the room and its associated rates."""
+input Room2Input {
+  """Internal room code."""
+  code: String
+  """Room reservation identifier."""
+  id: Int
+  """Room name/description."""
+  name: String
+  """List of paxes for the room."""
+  paxes: [ApiPaxInput]
+  """List of rates associated to the room."""
+  rates: [ApiRateInput]
+  """Booking status of the room."""
+  status: Status
+  """Booking reference of the booking/room for external supplier bookings."""
+  supplierReference: String
+}
+
+"""Definition of a rate."""
+input ApiRateInput {
+  """Number of adults requested for each room."""
+  adults: Int
+  """Number of rooms available for a particular room type."""
+  allotment: Int
+  """Internal board code."""
+  boardCode: String
+  """Board name/description."""
+  boardName: String
+  """Brand of the hotel."""
+  brand: String
+  """List of cancellation policies on the rate."""
+  cancellationPolicies: [ApiCancellationPolicyInput]
+  """Number of children requested for each room."""
+  children: Int
+  """Ages of the children (if any)."""
+  childrenAges: String
+  """Profit margin the agency takes (commissionable model)."""
+  commission: Float
+  """Percentual share of the price corresponding to commision."""
+  commissionPCT: Float
+  """Share of the commission corresponding to the Value Added Tax."""
+  commissionVAT: Float
+  """Breakdown of the rate for each day of the stay."""
+  dailyRates: [ApiDailyRateInput]
+  """
+  Profit margin that the agency would take if it sells at that recommended price.
+  """
+  discount: Float
+  """
+  Percentual share of the price corresponding to the profit margin the agency would take if it sells at that recommended price.
+  """
+  discountPCT: Float
+  """Hotel currency(for the pay at hotel model)."""
+  hotelCurrency: String
+  """Identifies if the rate price is recommended."""
+  hotelMandatory: Boolean
+  """Gross price of the room in hotelCurrency(for the pay at hotel model)."""
+  hotelSellingRate: Float
+  """Net price of the rate."""
+  net: Float
+  """List of offers on the rate."""
+  offers: [ApiOfferInput]
+  """Defines if the rate is for packaging."""
+  packaging: Boolean
+  """Defines the type of payment accepted."""
+  paymentType: PaymentType
+  """List of promotions on the rate."""
+  promotions: [ApiPromotionInput]
+  """Breakdown of the rate."""
+  rateBreakDown: ApiRateBreakDownInput
+  """Class of the rate."""
+  rateClass: String
+  """Rate comments that contain important information."""
+  rateComments: String
+  """
+  Comments associated to this rate (more information on [Hotel Content API](/documentation/hotels/content-api/api-reference/) ).
+  """
+  rateCommentsId: String
+  """
+  Internal key that represents a combination of room type, category, board and occupancy. Is returned in Availability and used to valuate a rate and confirm a booking.
+  """
+  rateKey: String
+  """
+  Determines if can booked directly (BOOKABLE) or if it needs to be checked with the â€˜CheckRateâ€™ operation (RECHECK).
+  """
+  rateType: RateType
+  """Difference between original rate price and upselling rate price."""
+  rateup: Float
+  """
+  Indicates if the rate is only for residents (only appears when resident rates are requested).
+  """
+  resident: Boolean
+  """Number of rooms requested."""
+  rooms: Int
+  """Gross price of the room in case it is included."""
+  sellingRate: Float
+  """Information about rates for alternative dates."""
+  shiftRates: [ApiShiftRateInput]
+  """Information of taxes."""
+  taxes: ApiTaxesInput
+}
+
+"""
+Set of rules that define the penalty the client will receive if the cancellation of a booking is made after a given date.
+"""
+input ApiCancellationPolicyInput {
+  """
+  Penalty that will be charged for cancellations after the indicated date, represented as a monetary amount.
+  """
+  amount: Float
+  """
+  Date from which the penalties are applied in ISO 8601 format (yyyy-MM-ddTHH:mm:ssZ).
+  """
+  from: String
+  """
+  Penalty that will be charged for cancellations after the indicated date, represented as a monetary amount, provided in hotel currency (for the pay at hotel model).
+  """
+  hotelAmount: Float
+  """
+  Currency in which the cancellation penalties must be paid (for the pay at hotel model).
+  """
+  hotelCurrency: String
+  """
+  Penalty that will be applied for cancellations after the indicated date, represented as a number of nights.
+  """
+  numberOfNights: Float
+  """
+  Penalty that will be charged for cancellations after the indicated date, represented as a monetary amount, represented as a percentage of the total amount of the booking.
+  """
+  percent: Float
+}
+
+"""Rate for a specific day of the stay."""
+input ApiDailyRateInput {
+  """Net price per day."""
+  dailyNet: Float
+  """Room selling price per day."""
+  dailySellingRate: Float
+  """Day number of the stay for which the breakdown is made."""
+  offset: Int
+}
+
+"""Offer information."""
+input ApiOfferInput {
+  """
+  Monetary amount deducted by the offer. NOTE: This deduction is already applied to the final price.
+  """
+  amount: Float
+  """Code of the offer."""
+  code: String
+  """Short name/description of the offer."""
+  name: String
+}
+
+"""Promotion information."""
+input ApiPromotionInput {
+  """Code of the promotion."""
+  code: String
+  """Short name/description of the promotion."""
+  name: String
+  """Additional information regarding the promotion."""
+  remark: String
+}
+
+"""Breakdown of the rate."""
+input ApiRateBreakDownInput {
+  """Information on discounts for the rate."""
+  rateDiscounts: [ApiRateDiscountInput]
+  """Information on supplements for the rate."""
+  rateSupplements: [ApiRateSupplementInput]
+}
+
+"""Information describing a discount on a rate."""
+input ApiRateDiscountInput {
+  """
+  Monetary deducted by the discount NOTE: This deduction is already applied to the final price.
+  """
+  amount: Float
+  """Code of the discount."""
+  code: String
+  """Discount name/description."""
+  name: String
+}
+
+"""Information describing a supplement on a rate."""
+input ApiRateSupplementInput {
+  """Amount of the supplement."""
+  amount: Float
+  """Internal code of the supplement."""
+  code: String
+  """Date from which the discount is applied."""
+  from: String
+  """Name/description of the supplement."""
+  name: String
+  """Number of nights for which the supplement applies."""
+  nights: Int
+  """Number of paxes that are affected by the supplement."""
+  paxNumber: Int
+  """Date when the discount ends."""
+  to: String
+}
+
+"""
+Definition of a rate for an alternative date to the one used in the availability request.
+"""
+input ApiShiftRateInput {
+  """Number of rooms available for a particular room type."""
+  allotment: Int
+  """Brand of the hotel."""
+  brand: String
+  """
+  CheckIn date for the shift rate. This will always be different than the requested date or the dates of the not alternative rates.
+  """
+  checkIn: String
+  """
+  CheckIn date for the shift rate. This will always be different than the requested date or the dates of the not alternative rates.
+  """
+  checkOut: String
+  """Profit margin the agency takes (commissionable model)."""
+  commission: Float
+  """Percentual share of the price corresponding to commision."""
+  commissionPCT: Float
+  """Share of the commission corresponding to the Value Added Tax."""
+  commissionVAT: Float
+  """
+  Profit margin that the agency would take if it sells at that recommended price.
+  """
+  discount: Float
+  """
+  Percentual share of the price corresponding to the profit margin the agency would take if it sells at that recommended price.
+  """
+  discountPCT: Float
+  """Hotel currency(for the pay at hotel model)."""
+  hotelCurrency: String
+  """Identifies if the rate price is recommended."""
+  hotelMandatory: Boolean
+  """Gross price of the room in hotelCurrency(for the pay at hotel model)."""
+  hotelSellingRate: Float
+  """Net price of the rate."""
+  net: Float
+  """Class of the rate."""
+  rateClass: String
+  """
+  Internal key that represents a combination of room type, category, board and occupancy. Is returned in Availability and used to valuate a rate and confirm a booking.
+  """
+  rateKey: String
+  """
+  Determines if can booked directly (BOOKABLE) or if it needs to be checked with the â€˜CheckRateâ€™ operation (RECHECK).
+  """
+  rateType: RateType
+  """
+  Indicates if the rate is only for residents (only appears when resident rates are requested).
+  """
+  resident: Boolean
+  """Gross price of the room in case it is included."""
+  sellingRate: Float
+}
+
+"""Information of taxes."""
+input ApiTaxesInput {
+  """Indicates if all taxes are included or not."""
+  allIncluded: Boolean
+  """
+  "margin": This is an indirect tax regime for travel agencies where split of taxes is not shown in the invoices. In this case, the customer could not deduct any taxes even if the final customer is a legal entity with the right of deduction for indirect taxes. "general": This is the indirect tax regime where the split of taxes is shown in the invoices. In this case, the booking will be invoiced with split of taxes and the customer could be able to deduct the VAT and in some countries, these taxes are reduced rates. This tax scheme offers tax advantage for business customers with the right of deduction for indirect taxes.
+  """
+  taxScheme: TaxScheme
+  """List of taxes."""
+  taxes: [ApiTaxInput]
+}
+
+"""Tax information."""
+input ApiTaxInput {
+  """
+  Value of the tax in hotel currency if the tax is not included in the price.
+  """
+  amount: Float
+  """Net amount of the tax in the client configured currency."""
+  clientAmount: Float
+  """Client configured currency."""
+  clientCurrency: String
+  """Currency of the tax amount."""
+  currency: String
+  """Indicates if the tax is included in the price or not."""
+  included: Boolean
+  """Value of the tax as a percentage."""
+  percent: Float
+  """Type of the tax."""
+  type: Type3
+}
+
+"""Supplier information."""
+input ApiSupplierInput {
+  """Supplier name."""
+  name: String
+  """Supplier VAT number."""
+  vatNumber: String
+}
+
+"""
+Additional room options with superior category available at the same hotel that was requested.
+"""
+input ApiUpsellingInput {
+  """List of available rooms with superior category."""
+  rooms: [Room2Input]
+}
+
+"""Information about the invoice company."""
+input ApiReceptiveInput {
+  """Code of the invoice company."""
+  code: String
+  """Name of the invoice company."""
+  name: String
+  """Registration number of the invoice company."""
+  registrationNumber: String
+}
+
+"""Information regarding the allowed modifications to the booking."""
+input ApiModificationPoliciesInput {
+  """Indicates if the booking allows cancellation."""
+  cancellation: Boolean!
+  """Indicates if the booking allows modification."""
+  modification: Boolean!
+}
+
+enum Mode {
+  SIMULATION
+  UPDATE
+}
+
+"""Response of CheckRate operation."""
+type CheckRateRS {
+  """Relevant internal information."""
+  auditData: ApiAuditDataCheckRate!
+  """
+  Information on the error. Only returned in case of error. Includes the echotoken for debugging purposes.
+  """
+  error: ApiError
+  """Information about an hotel and its associated room rates."""
+  hotels: ApiHotelCheckRate
+}
+
+"""Relevant internal information."""
+type ApiAuditDataCheckRate {
+  """Token identifier of the operation."""
+  token: String
+}
+
+"""Information about an hotel and its associated room rates."""
+type ApiHotelCheckRate {
+  """Hotelbeds code of the hotel category."""
+  categoryCode: String
+  """Name of the hotel category."""
+  categoryName: String
+  """Check-in date."""
+  checkIn: String
+  """Check-out date."""
+  checkOut: String
+  """Hotelbeds internal hotel code."""
+  code: Int
+  """
+  List of credit cards accepted by the hotel for Liberate model (pay at hotel).
+  """
+  creditCards: [ApiCreditCard]
+  """Client currency."""
+  currency: String
+  """Hotel description."""
+  description: String
+  """Code of the destination of the hotel location."""
+  destinationCode: String
+  """Name of the destination of the hotel location."""
+  destinationName: String
+  """Giata hotel code."""
+  giata: Float
+  """Latitude coordinate of the hotel location."""
+  latitude: String
+  """Longitude coordinate of the hotel location."""
+  longitude: String
+  """Maximum hotel room price."""
+  maxRate: Float
+  """Minimum hotel room price."""
+  minRate: Float
+  """Information regarding the allowed modifications to the booking."""
+  modificationPolicies: ApiModificationPolicies
+  """Name of the hotel."""
+  name: String
+  """
+  Indicates the need for payment data(i.e.: credit card details) in order to finish the booking.
+  """
+  paymentDataRequired: Boolean
+  rooms: [RoomCheckRate]
+  """Total amount of the booking."""
+  totalNet: Float
+  """
+  Total amount of the booking in hotelCurrency (for the pay at hotel model).
+  """
+  totalSellingRate: Float
+  """
+  Additional room options with superior category available at the same hotel that was requested.
+  """
+  upselling: ApiUpsellingCheckRate
+  """Code of the zone of the hotel location."""
+  zoneCode: Int
+  """Name of the zone of the hotel location."""
+  zoneName: String
+}
+
+"""Information about the room and its associated rates."""
+type RoomCheckRate {
+  """Internal room code."""
+  code: String
+  """Room name/description."""
+  name: String
+  """List of rates associated to the room."""
+  rates: [ApiRateCheckRate]
+}
+
+"""Definition of a rate."""
+type ApiRateCheckRate {
+  """Number of adults requested for each room."""
+  adults: Int
+  """Number of rooms available for a particular room type."""
+  allotment: Int
+  """Internal board code."""
+  boardCode: String
+  """Board name/description."""
+  boardName: String
+  """List of cancellation policies on the rate."""
+  cancellationPolicies: [ApiCancellationPolicyCheckRate]
+  """Number of children requested for each room."""
+  children: Int
+  """Profit margin the agency takes (commissionable model)."""
+  commission: Float
+  """Percentual share of the price corresponding to commision."""
+  commissionPCT: Float
+  """Share of the commission corresponding to the Value Added Tax."""
+  commissionVAT: Float
+  """
+  Profit margin that the agency would take if it sells at that recommended price.
+  """
+  discount: Float
+  """
+  Percentual share of the price corresponding to the profit margin the agency would take if it sells at that recommended price.
+  """
+  discountPCT: Float
+  """Hotel currency(for the pay at hotel model)."""
+  hotelCurrency: String
+  """Identifies if the rate price is recommended."""
+  hotelMandatory: Boolean
+  """Gross price of the room in hotelCurrency(for the pay at hotel model)."""
+  hotelSellingRate: Float
+  """Net price of the rate."""
+  net: Float
+  """List of offers on the rate."""
+  offers: [ApiOffer]
+  """Defines if the rate is for packaging."""
+  packaging: Boolean
+  """Defines the type of payment accepted."""
+  paymentType: PaymentType
+  """List of promotions on the rate."""
+  promotions: [ApiPromotion]
+  """Breakdown of the rate."""
+  rateBreakDown: ApiRateBreakDown
+  """Class of the rate."""
+  rateClass: String
+  """Rate comments that contain important information."""
+  rateComments: String
+  """
+  Internal key that represents a combination of room type, category, board and occupancy. Is returned in Availability and used to valuate a rate and confirm a booking.
+  """
+  rateKey: String
+  """
+  Determines if can booked directly (BOOKABLE) or if it needs to be checked with the â€˜CheckRateâ€™ operation (RECHECK).
+  """
+  rateType: RateType
+  """
+  Indicates if the rate is only for residents (only appears when resident rates are requested).
+  """
+  resident: Boolean
+  """Number of rooms requested."""
+  rooms: Int
+  """Gross price of the room in case it is included."""
+  sellingRate: Float
+}
+
+"""
+Set of rules that define the penalty the client will receive if the cancellation of a booking is made after a given date.
+"""
+type ApiCancellationPolicyCheckRate {
+  """
+  Penalty that will be charged for cancellations after the indicated date, represented as a monetary amount.
+  """
+  amount: Float
+  """
+  Date from which the penalties are applied in ISO 8601 format (yyyy-MM-ddTHH:mm:ssZ).
+  """
+  from: String
+  """
+  Penalty that will be charged for cancellations after the indicated date, represented as a monetary amount, provided in hotel currency (for the pay at hotel model).
+  """
+  hotelAmount: Float
+  """
+  Currency in which the cancellation penalties must be paid (for the pay at hotel model).
+  """
+  hotelCurrency: String
+}
+
+"""
+Additional room options with superior category available at the same hotel that was requested.
+"""
+type ApiUpsellingCheckRate {
+  """List of available rooms with superior category."""
+  rooms: [RoomUpsellingCheckRate]
+}
+
+"""Information about the room and its associated rates."""
+type RoomUpsellingCheckRate {
+  """List of rates associated to the room."""
+  rates: [ApiRateUpsellingCheckRate]
+}
+
+"""Definition of a rate."""
+type ApiRateUpsellingCheckRate {
+  """Number of adults requested for each room."""
+  adults: Int
+  """Number of rooms available for a particular room type."""
+  allotment: Int
+  """Internal board code."""
+  boardCode: String
+  """Board name/description."""
+  boardName: String
+  """List of cancellation policies on the rate."""
+  cancellationPolicies: [ApiCancellationPolicyCheckRate]
+  """Number of children requested for each room."""
+  children: Int
+  """Profit margin the agency takes (commissionable model)."""
+  commission: Float
+  """Percentual share of the price corresponding to commision."""
+  commissionPCT: Float
+  """Share of the commission corresponding to the Value Added Tax."""
+  commissionVAT: Float
+  """
+  Profit margin that the agency would take if it sells at that recommended price.
+  """
+  discount: Float
+  """
+  Percentual share of the price corresponding to the profit margin the agency would take if it sells at that recommended price.
+  """
+  discountPCT: Float
+  """Hotel currency(for the pay at hotel model)."""
+  hotelCurrency: String
+  """Identifies if the rate price is recommended."""
+  hotelMandatory: Boolean
+  """Gross price of the room in hotelCurrency(for the pay at hotel model)."""
+  hotelSellingRate: Float
+  """Net price of the rate."""
+  net: Float
+  """Defines if the rate is for packaging."""
+  packaging: Boolean
+  """Defines the type of payment accepted."""
+  paymentType: PaymentType
+  """Breakdown of the rate."""
+  rateBreakDown: ApiRateBreakDown
+  """Class of the rate."""
+  rateClass: String
+  """Rate comments that contain important information."""
+  rateComments: String
+  """
+  Internal key that represents a combination of room type, category, board and occupancy. Is returned in Availability and used to valuate a rate and confirm a booking.
+  """
+  rateKey: String
+  """
+  Determines if can booked directly (BOOKABLE) or if it needs to be checked with the â€˜CheckRateâ€™ operation (RECHECK).
+  """
+  rateType: RateType
+  """Difference between original rate price and upselling rate price."""
+  rateup: Float
+  """
+  Indicates if the rate is only for residents (only appears when resident rates are requested).
+  """
+  resident: Boolean
+  """Number of rooms requested."""
+  rooms: Int
+  """Gross price of the room in case it is included."""
+  sellingRate: Float
+}
+
+"""Request of CheckRate operation."""
+input CheckRateRQInput {
+  """
+  Language code that defines the language of the response. English will be used by default if this field is not informed.
+  """
+  language: String
+  """List of rooms to be checked/valuated."""
+  rooms: [ApiBookingRoomInput]
+  """Parameter to add or remove the upSelling options node to the response."""
+  upselling: Boolean
+}
