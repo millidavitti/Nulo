@@ -23,7 +23,7 @@ async function batch(fetchCycle, urlObj, model) {
   while (!fetchCycle.done) {
     if (fetchCycle.count === fetchCycle.cycle) {
       fetchCycle.done = true;
-      console.log("Done");
+      console.log("Cycle Complete");
       break;
     }
     // Create log file if it doesn't exist
@@ -35,6 +35,7 @@ async function batch(fetchCycle, urlObj, model) {
         '{"lastUpdate":0}'
       );
     }
+
     // Last Update
     const { lastUpdate } = JSON.parse(
       readFileSync(resolve("server", "utils", "lastUpdateTime.json"), "utf-8")
@@ -42,7 +43,7 @@ async function batch(fetchCycle, urlObj, model) {
 
     const date = `${new Date(lastUpdate).getFullYear()}-${new Date(
       lastUpdate
-    ).getMonth()}-${`${new Date(lastUpdate).getDay()}`.padStart(2, "0")}`;
+    ).getMonth()}-${`${new Date(lastUpdate).getDate()}`.padStart(2, "0")}`;
 
     console.log(urlObj.query.from, urlObj.query.to, lastUpdate);
 

@@ -4,6 +4,7 @@ const EventEmitter = require("events");
 const connectdb = require("../../../server/db/connect");
 const {
   hotelsDB,
+  countriesDB,
   destinationsDB,
   roomsDB,
   boardsDB,
@@ -34,7 +35,7 @@ function init(events) {
       "countries",
       new FetchCycle(5),
       new Url("/locations/countries", 1, 200),
-      destinationsDB
+      countriesDB
     );
   });
   // Locations
