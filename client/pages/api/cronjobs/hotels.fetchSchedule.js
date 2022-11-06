@@ -206,7 +206,7 @@ function init(events) {
   });
   events.on("done", async () => {
     fs.writeFileSync(
-      path.join(__dirname, "lastUpdateTime.json"),
+      path.resolve("server", "utils", "lastUpdateTime.json"),
       JSON.stringify({ lastUpdate: Date.now() })
     );
     events.removeAllListeners();
