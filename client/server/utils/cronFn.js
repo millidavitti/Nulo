@@ -28,13 +28,16 @@ async function batch(fetchCycle, urlObj, model) {
     }
     // Create log file if it doesn't exist
     try {
-      readFileSync("lastUpdateTime.json");
+      readFileSync(resolve("server", "utils", "lastUpdateTime.json"));
     } catch (_) {
-      writeFileSync("lastUpdateTime.json", '{"lastUpdate":0}');
+      writeFileSync(
+        resolve("server", "utils", "lastUpdateTime.json"),
+        '{"lastUpdate":0}'
+      );
     }
     // Last Update
     const { lastUpdate } = JSON.parse(
-      readFileSync("lastUpdateTime.json", "utf-8")
+      readFileSync(resolve("server", "utils", "lastUpdateTime.json"), "utf-8")
     );
 
     const date = `${new Date(lastUpdate).getFullYear()}-${new Date(
