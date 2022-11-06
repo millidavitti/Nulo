@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { join } = require("path");
+const { resolve } = require("path");
 const { readFileSync, writeFileSync } = require("fs");
 const sha256 = require("js-sha256");
 const path = require("path");
@@ -28,51 +28,13 @@ async function batch(fetchCycle, urlObj, model) {
     }
     // Create log file if it doesn't exist
     try {
-      readFileSync(
-        join(
-          __dirname,
-          "..",
-          "..",
-          "..",
-          "..",
-          "..",
-          "server",
-          "utils",
-          "lastUpdateTime.json"
-        )
-      );
+      readFileSync("lastUpdateTime.json");
     } catch (_) {
-      writeFileSync(
-        join(
-          __dirname,
-          "..",
-          "..",
-          "..",
-          "..",
-          "..",
-          "server",
-          "utils",
-          "lastUpdateTime.json"
-        ),
-        '{"lastUpdate":0}'
-      );
+      writeFileSync("lastUpdateTime.json", '{"lastUpdate":0}');
     }
     // Last Update
     const { lastUpdate } = JSON.parse(
-      readFileSync(
-        join(
-          __dirname,
-          "..",
-          "..",
-          "..",
-          "..",
-          "..",
-          "server",
-          "utils",
-          "lastUpdateTime.json"
-        ),
-        "utf-8"
-      )
+      readFileSync("lastUpdateTime.json", "utf-8")
     );
 
     const date = `${new Date(lastUpdate).getFullYear()}-${new Date(

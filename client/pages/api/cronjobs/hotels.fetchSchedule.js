@@ -206,7 +206,7 @@ function init(events) {
   });
   events.on("done", async () => {
     fs.writeFileSync(
-      path.join(__dirname, "..", "..", "..", "..", "..","server","utils", "lastUpdateTime.json"),
+      path.resolve("server", "utils", "lastUpdateTime.json"),
       JSON.stringify({ lastUpdate: Date.now() })
     );
     events.removeAllListeners();
@@ -221,7 +221,7 @@ function init(events) {
   );
 }
 
-export default function batchProcess(_, res) {
+export default async function batchProcess(_, res) {
   connectdb();
   init(events);
   res.json({ cycle: "Batching in progress..." });
