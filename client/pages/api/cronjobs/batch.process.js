@@ -4,6 +4,7 @@ const EventEmitter = require("events");
 const connectdb = require("../../../server/db/connect");
 const {
   hotelsDB,
+  countriesDB,
   destinationsDB,
   roomsDB,
   boardsDB,
@@ -20,7 +21,7 @@ const {
   currenciesDB,
   terminalsDB,
   ratecommentdetailsDB,
-} = require("../../../server/model/collections.mongo");
+} = require("../../../server/models/collections.mongo");
 const { batch, FetchCycle, Url } = require("../../../server/utils/cronFn");
 
 const events = new EventEmitter();
@@ -34,7 +35,7 @@ function init(events) {
       "countries",
       new FetchCycle(5),
       new Url("/locations/countries", 1, 200),
-      destinationsDB
+      countriesDB
     );
   });
   // Locations
