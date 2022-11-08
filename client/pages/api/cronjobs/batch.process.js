@@ -21,7 +21,7 @@ const {
   currenciesDB,
   terminalsDB,
   ratecommentdetailsDB,
-} = require("../../../server/model/collections.mongo");
+} = require("../../../server/models/collections.mongo");
 const { batch, FetchCycle, Url } = require("../../../server/utils/cronFn");
 
 const events = new EventEmitter();
