@@ -3,9 +3,9 @@ module.exports = function parseQuery(query) {
   const pag = {};
   for (const [filter, val] of Object.entries(query)) {
     if (filter === "from" || filter === "limit") {
-      pag[filter] = val;
+      pag[filter] = Number.parseInt(val);
     } else {
-      filters[filter] = val;
+      filters[filter] = isNaN(val) ? val : Number.parseInt(val);
     }
   }
   return { filters, pag };
