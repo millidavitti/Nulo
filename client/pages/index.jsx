@@ -24,8 +24,11 @@ import TabNav from "../components/TabNav";
 import NewsLetter from "../components/NewsLetter";
 import { cityImgs, imgArray, stays } from "../utils/helpers";
 import Head from "next/head";
+import useCities from "../hooks/request";
 
 export default function Home() {
+	const data = useCities();
+
 	return (
 		<>
 			<Head>
