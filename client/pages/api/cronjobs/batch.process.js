@@ -20,7 +20,7 @@ const {
   imagetypesDB,
   currenciesDB,
   terminalsDB,
-  ratecommentdetailsDB,
+  ratecommentsDB,
 } = require("../../../server/models/collections.mongo");
 const { batch, FetchCycle, Url } = require("../../../server/utils/cronFn");
 
@@ -44,7 +44,7 @@ function init(events) {
     await batch(cycle, url, db);
     events.emit(
       "destinations",
-      new FetchCycle(5),
+      new FetchCycle(7),
       new Url("/locations/destinations", 1, 1000),
       destinationsDB
     );
@@ -54,7 +54,7 @@ function init(events) {
     await batch(cycle, url, db);
     events.emit(
       "rooms",
-      new FetchCycle(3),
+      new FetchCycle(13),
       new Url("/types/rooms", 1, 1000),
       roomsDB
     );
@@ -66,7 +66,7 @@ function init(events) {
     events.emit(
       "boards",
       new FetchCycle(1),
-      new Url("/types/boards", 1, 1000),
+      new Url("/types/boards", 1, 100),
       boardsDB
     );
   });
@@ -76,7 +76,7 @@ function init(events) {
     events.emit(
       "accommodations",
       new FetchCycle(1),
-      new Url("/types/accommodations", 1, 1000),
+      new Url("/types/accommodations", 1, 100),
       accommodationsDB
     );
   });
@@ -86,7 +86,7 @@ function init(events) {
     events.emit(
       "categories",
       new FetchCycle(1),
-      new Url("/types/categories", 1, 1000),
+      new Url("/types/categories", 1, 100),
       categoriesDB
     );
   });
@@ -95,7 +95,7 @@ function init(events) {
     await batch(cycle, url, db);
     events.emit(
       "chains",
-      new FetchCycle(2),
+      new FetchCycle(3),
       new Url("/types/chains", 1, 1000),
       chainsDB
     );
@@ -116,7 +116,7 @@ function init(events) {
     events.emit(
       "facilitygroups",
       new FetchCycle(1),
-      new Url("/types/facilitygroups", 1, 1000),
+      new Url("/types/facilitygroups", 1, 100),
       facilitygroupsDB
     );
   });
@@ -126,7 +126,7 @@ function init(events) {
     events.emit(
       "issues",
       new FetchCycle(1),
-      new Url("/types/issues", 1, 1000),
+      new Url("/types/issues", 1, 200),
       issuesDB
     );
   });
@@ -136,7 +136,7 @@ function init(events) {
     events.emit(
       "languages",
       new FetchCycle(1),
-      new Url("/types/languages", 1, 1000),
+      new Url("/types/languages", 1, 100),
       languagesDB
     );
   });
@@ -146,7 +146,7 @@ function init(events) {
     events.emit(
       "promotions",
       new FetchCycle(1),
-      new Url("/types/promotions", 1, 1000),
+      new Url("/types/promotions", 1, 200),
       promotionsDB
     );
   });
@@ -156,7 +156,7 @@ function init(events) {
     events.emit(
       "segments",
       new FetchCycle(1),
-      new Url("/types/segments", 1, 1000),
+      new Url("/types/segments", 1, 100),
       segmentsDB
     );
   });
@@ -166,7 +166,7 @@ function init(events) {
     events.emit(
       "imagetypes",
       new FetchCycle(1),
-      new Url("/types/imagetypes", 1, 1000),
+      new Url("/types/imagetypes", 1, 100),
       imagetypesDB
     );
   });
@@ -176,7 +176,7 @@ function init(events) {
     events.emit(
       "currencies",
       new FetchCycle(1),
-      new Url("/types/currencies", 1, 1000),
+      new Url("/types/currencies", 1, 200),
       currenciesDB
     );
   });
@@ -186,7 +186,7 @@ function init(events) {
     events.emit(
       "terminals",
       new FetchCycle(1),
-      new Url("/types/terminals", 1, 1000),
+      new Url("/types/terminals", 1, 2000),
       terminalsDB
     );
   });
@@ -197,7 +197,7 @@ function init(events) {
       "ratecomments",
       new FetchCycle(100),
       new Url("/types/ratecomments", 1, 1000),
-      ratecommentdetailsDB
+      ratecommentsDB
     );
   });
   events.on("ratecomments", async (cycle, url, db) => {
@@ -216,7 +216,7 @@ function init(events) {
 
   events.emit(
     "hotels",
-    new FetchCycle(173),
+    new FetchCycle(175),
     new Url("/hotels", 1, 1000),
     hotelsDB
   );

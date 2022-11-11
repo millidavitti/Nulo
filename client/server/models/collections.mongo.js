@@ -12,7 +12,7 @@ const imagetypesDB = require("./imagetypes.mongo");
 const issuesDB = require("./issues.mongo");
 const languagesDB = require("./languages.mongo");
 const promotionsDB = require("./promotions.mongo");
-const ratecommentdetailsDB = require("./ratecommentdetails.mongo");
+const ratecommentsDB = require("./ratecomments.mongo");
 const roomsDB = require("./rooms.mongo");
 const segmentsDB = require("./segments.mongo");
 const terminalsDB = require("./terminals.mongo");
@@ -32,7 +32,7 @@ module.exports = {
   issuesDB,
   languagesDB,
   promotionsDB,
-  ratecommentdetailsDB,
+  ratecommentsDB,
   roomsDB,
   segmentsDB,
   terminalsDB,
