@@ -11,7 +11,7 @@ mongoose.connection.on("error", (error) => {
 
 function connectdb() {
   if (mongoose.connection.readyState) return;
-  mongoose.connect(process.env.MONGO_URI);
+  mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI);
 }
 
 module.exports = connectdb;
