@@ -20,7 +20,7 @@ const {
   imagetypesDB,
   currenciesDB,
   terminalsDB,
-  ratecommentdetailsDB,
+  ratecommentsDB,
 } = require("../../../server/models/collections.mongo");
 const { batch, FetchCycle, Url } = require("../../../server/utils/cronFn");
 
