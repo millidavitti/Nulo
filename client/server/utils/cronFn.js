@@ -26,24 +26,11 @@ async function batch(fetchCycle, urlObj, model) {
       console.log("Cycle Complete");
       break;
     }
-    // Create log file if it doesn't exist
-    try {
-      readFileSync(resolve("server", "utils", "lastUpdateTime.json"));
-    } catch (_) {
-      writeFileSync(
-        resolve("server", "utils", "lastUpdateTime.json"),
-        '{"lastUpdate":0}'
-      );
-    }
 
     // Last Update
-    const { lastUpdate } = JSON.parse(
-      readFileSync(resolve("server", "utils", "lastUpdateTime.json"), "utf-8")
-    );
+    const lastUpdate  = null;
 
-    const date = `${new Date(lastUpdate).getFullYear()}-${new Date(
-      lastUpdate
-    ).getMonth()}-${`${new Date(lastUpdate).getDate()}`.padStart(2, "0")}`;
+    const date = null
 
     console.log(urlObj.query.from, urlObj.query.to, lastUpdate);
 
