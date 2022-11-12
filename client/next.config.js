@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const { withAxiom } = require('next-axiom');
+const nextConfig = withAxiom({
 	reactStrictMode: true,
 	swcMinify: true,
 	webpack(config) {
@@ -10,6 +11,6 @@ const nextConfig = {
 
 		return config;
 	},
-};
+});
 
 module.exports = nextConfig;
