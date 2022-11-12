@@ -9,7 +9,7 @@ mongoose.connection.on("error", (error) => {
   console.log(error);
 });
 
-function connectdb() {
+async function connectdb() {
   if (mongoose.connection.readyState) return;
   mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI);
 }
