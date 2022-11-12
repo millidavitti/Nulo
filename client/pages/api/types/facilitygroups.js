@@ -6,7 +6,7 @@ const parseQuery = require("../../../server/utils/parseQuery");
 const api = express();
 
 export default api.get("/api/types/facilitygroups", async (req, res) => {
-  connectdb();
+  await connectdb();
   const { filters, pag } = parseQuery(req.query);
   const facilitygroups = await facilitygroupsDB
     .find(filters, { __v: 0 })

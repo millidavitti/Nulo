@@ -185,8 +185,8 @@ function init(events) {
     await batch(cycle, url, db);
     events.emit(
       "terminals",
-      new FetchCycle(1),
-      new Url("/types/terminals", 1, 2000),
+      new FetchCycle(2),
+      new Url("/types/terminals", 1, 1000),
       terminalsDB
     );
   });
@@ -223,7 +223,7 @@ function init(events) {
 }
 
 export default async function batchProcess(_, res) {
-  connectdb();
+  await connectdb();
   init(events);
   res.json({ cycle: "Batching in progress..." });
 }
