@@ -3,22 +3,24 @@ const { resolve } = require("path");
 const { readFileSync, writeFileSync } = require("fs");
 const sha256 = require("js-sha256");
 const path = require("path");
-const signature = sha256(
-  `${process.env.API_KEY}${process.env.API_SECRET}${Math.floor(
-    Date.now() / 1000
-  )}`
-);
+const signature = () =>
+  sha256(
+    `${process.env.API_KEY}${process.env.API_SECRET}${Math.floor(
+      Date.now() / 1000
+    )}`
+  );
 
-// Axios Instance: Partner API
-const partnerAPI = axios.create({
-  baseURL: process.env.API_URL,
-  headers: {
-    "api-key": process.env.API_KEY,
-    "x-signature": signature,
-  },
-});
+// Create log file if it doesn't exist
+try {
+  readFileSync(resolve("server", "utils", "lastUpdateTime.json"));
+} catch (_) {
+  writeFileSync(
+    resolve("server", "utils", "lastUpdateTime.json"),
+    '{"lastUpdate":0}'
+  );
+}
 
-// Hotels
+//Batch
 async function batch(fetchCycle, urlObj, model) {
   while (!fetchCycle.done) {
     if (fetchCycle.count === fetchCycle.cycle) {
@@ -26,17 +28,14 @@ async function batch(fetchCycle, urlObj, model) {
       console.log("Cycle Complete");
       break;
     }
-
-    // Create log file if it doesn't exist
-    try {
-      readFileSync(resolve("server", "utils", "lastUpdateTime.json"));
-    } catch (_) {
-      writeFileSync(
-        resolve("server", "utils", "lastUpdateTime.json"),
-        '{"lastUpdate":0}'
-      );
-    }
-
+    // Axios Instance: Partner API
+    const partnerAPI = axios.create({
+      baseURL: process.env.API_URL,
+      headers: {
+        "api-key": process.env.API_KEY,
+        "x-signature": signature(),
+      },
+    });
     // Last Update
     const { lastUpdate } = JSON.parse(
       readFileSync(resolve("server", "utils", "lastUpdateTime.json"), "utf-8")
