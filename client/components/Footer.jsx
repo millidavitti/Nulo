@@ -6,7 +6,7 @@ import ResponsiveGrid from "./Layout/ResponsiveGrid";
 import Nulo from "./Nulo";
 export default function Footer() {
 	return (
-		<footer>
+        <footer>
 			<Container>
 				<div className='footer-header'>
 					<Nulo size={50} />
@@ -21,19 +21,19 @@ export default function Footer() {
 							<h2>Getting started</h2>
 							<div className='footer-items'>
 								<Link href=''>
-									<a>Installation</a>
+									Installation
 								</Link>
 								<Link href=''>
-									<a>Release Notes</a>
+									Release Notes
 								</Link>
 								<Link href=''>
-									<a>Upgrade Guide</a>
+									Upgrade Guide
 								</Link>
 								<Link href=''>
-									<a>Browser Support</a>
+									Browser Support
 								</Link>
 								<Link href=''>
-									<a>Editor Support</a>
+									Editor Support
 								</Link>
 							</div>
 						</div>
@@ -41,19 +41,19 @@ export default function Footer() {
 							<h2>Explore</h2>
 							<div className='footer-items'>
 								<Link href=''>
-									<a>Design feeatures</a>
+									Design feeatures
 								</Link>
 								<Link href=''>
-									<a>Prototyping</a>
+									Prototyping
 								</Link>
 								<Link href=''>
-									<a>Design systems</a>
+									Design systems
 								</Link>
 								<Link href=''>
-									<a>Pricing</a>
+									Pricing
 								</Link>
 								<Link href=''>
-									<a>Security</a>
+									Security
 								</Link>
 							</div>
 						</div>
@@ -61,19 +61,19 @@ export default function Footer() {
 							<h2>Resources</h2>
 							<div className='footer-items'>
 								<Link href=''>
-									<a>Design feeatures</a>
+									Design feeatures
 								</Link>
 								<Link href=''>
-									<a>Prototyping</a>
+									Prototyping
 								</Link>
 								<Link href=''>
-									<a>Design systems</a>
+									Design systems
 								</Link>
 								<Link href=''>
-									<a>Pricing</a>
+									Pricing
 								</Link>
 								<Link href=''>
-									<a>Security</a>
+									Security
 								</Link>
 							</div>
 						</div>
@@ -81,19 +81,19 @@ export default function Footer() {
 							<h2>Getting started</h2>
 							<div className='footer-items'>
 								<Link href=''>
-									<a>Community</a>
+									Community
 								</Link>
 								<Link href=''>
-									<a>Prototyping</a>
+									Prototyping
 								</Link>
 								<Link href=''>
-									<a>Design systems</a>
+									Design systems
 								</Link>
 								<Link href=''>
-									<a>Pricing</a>
+									Pricing
 								</Link>
 								<Link href=''>
-									<a>Security</a>
+									Security
 								</Link>
 							</div>
 						</div>
@@ -101,5 +101,5 @@ export default function Footer() {
 				</Margin>
 			</Container>
 		</footer>
-	);
+    );
 }

@@ -9,7 +9,7 @@ export default (function MobileSearch({ state, dispatch }) {
 	const [input, setInput] = useState("");
 	const focusInput = useRef();
 	return (
-		<div
+        <div
 			className='mobile-search'
 			style={{ translate: state.mobileSearch ? "0" : "0 200%" }}
 		>
@@ -239,7 +239,7 @@ export default (function MobileSearch({ state, dispatch }) {
 			</div>
 			<div className='clearall-search'>
 				<button type='button'>Clear all</button>
-				<Link href='/hotel/listings'>
+				<Link href='/hotel/listings' legacyBehavior>
 					<button
 						type='button'
 						onClick={() => dispatch({ type: "mobile-search" })}
@@ -250,5 +250,5 @@ export default (function MobileSearch({ state, dispatch }) {
 				</Link>
 			</div>
 		</div>
-	);
+    );
 });
