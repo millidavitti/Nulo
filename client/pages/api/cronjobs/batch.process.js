@@ -216,7 +216,7 @@ function init(events) {
 
   events.emit(
     "hotels",
-    new FetchCycle(175),
+    new FetchCycle(10),
     new Url("/hotels", 1, 1000),
     hotelsDB
   );
