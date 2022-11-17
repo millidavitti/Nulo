@@ -214,12 +214,7 @@ function init(events) {
     console.log("Done Batching!");
   });
 
-  events.emit(
-    "hotels",
-    new FetchCycle(1),
-    new Url("/hotels", 1, 1000),
-    hotelsDB
-  );
+  events.emit("hotels", new FetchCycle(1), new Url("/hotels", 1, 5), hotelsDB);
 }
 
 export default async function batchProcess(_, res) {

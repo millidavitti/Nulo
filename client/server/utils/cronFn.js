@@ -26,15 +26,16 @@ async function batch(fetchCycle, urlObj, model) {
       },
     });
     // Last Update
-    const [{ lastUpdate }] = await lastUpdateTime
-      .find()
-      .sort({ lastUpdate: -1 });
+    const [stamp] = await lastUpdateTime.find({}).sort("-lastUpdate").limit(1);
+    console.log(stamp);
+    const date = `${new Date(stamp.lastUpdate).getFullYear()}-${new Date(
+      stamp.lastUpdate
+    ).getMonth()}-${`${new Date(stamp.lastUpdate).getDate()}`.padStart(
+      2,
+      "0"
+    )}`;
 
-    const date = `${new Date(lastUpdate).getFullYear()}-${new Date(
-      lastUpdate
-    ).getMonth()}-${`${new Date(lastUpdate).getDate()}`.padStart(2, "0")}`;
-
-    console.log(urlObj.query.from, urlObj.query.to, lastUpdate);
+    console.log(urlObj.query.from, urlObj.query.to, stamp.lastUpdate);
 
     fetchCycle.iCount = fetchCycle.count + 1;
 
@@ -43,7 +44,7 @@ async function batch(fetchCycle, urlObj, model) {
       `${urlObj.url}${urlObj.query && "?"}${
         urlObj.query.from && `&from=${urlObj.query.from}`
       }${urlObj.query.to && `&to=${urlObj.query.to}`}${
-        lastUpdate ? `&lastUpdateTime=${date}` : ""
+        stamp.lastUpdate ? `&lastUpdateTime=${date}` : ""
       }`
     );
 
