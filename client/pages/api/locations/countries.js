@@ -6,7 +6,7 @@ const parseQuery = require("../../../server/utils/parseQuery");
 const api = express();
 
 export default api.get("/api/locations/countries", async (req, res) => {
-  await connectdb();
+   connectdb();
   const { filters, pag } = parseQuery(req.query);
   const countries = await countriesDB
     .find(filters, { __v: 0 })

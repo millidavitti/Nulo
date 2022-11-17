@@ -1,6 +1,8 @@
-import lastUpdateTimeMongo from "../../../server/models/lastUpdateTime.mongo";
 const EventEmitter = require("events");
+const { createScheduledFunction } = require("inngest");
+const { serve } = require("inngest/next");
 const connectdb = require("../../../server/db/connect");
+import lastUpdateTimeMongo from "../../../server/models/lastUpdateTime.mongo";
 const {
   hotelsDB,
   countriesDB,
@@ -26,6 +28,7 @@ const { batch, FetchCycle, Url } = require("../../../server/utils/cronFn");
 const events = new EventEmitter();
 
 function init(events) {
+  connectdb();
   // Hotels
   events.on("hotels", async (cycle, url, db) => {
     console.log("Polling Hotels...");
@@ -44,7 +47,7 @@ function init(events) {
     events.emit(
       "destinations",
       new FetchCycle(7),
-      new Url("/locations/destinations", 1, 1000),
+      new Url("/locations/destinations", 1, 1),
       destinationsDB
     );
   });
@@ -54,7 +57,7 @@ function init(events) {
     events.emit(
       "rooms",
       new FetchCycle(13),
-      new Url("/types/rooms", 1, 1000),
+      new Url("/types/rooms", 1, 1),
       roomsDB
     );
   });
@@ -95,7 +98,7 @@ function init(events) {
     events.emit(
       "chains",
       new FetchCycle(3),
-      new Url("/types/chains", 1, 1000),
+      new Url("/types/chains", 1, 1),
       chainsDB
     );
   });
@@ -105,7 +108,7 @@ function init(events) {
     events.emit(
       "facilities",
       new FetchCycle(1),
-      new Url("/types/facilities", 1, 1000),
+      new Url("/types/facilities", 1, 1),
       facilitiesDB
     );
   });
@@ -185,7 +188,7 @@ function init(events) {
     events.emit(
       "terminals",
       new FetchCycle(2),
-      new Url("/types/terminals", 1, 1000),
+      new Url("/types/terminals", 1, 1),
       terminalsDB
     );
   });
@@ -195,7 +198,7 @@ function init(events) {
     events.emit(
       "ratecomments",
       new FetchCycle(100),
-      new Url("/types/ratecomments", 1, 1000),
+      new Url("/types/ratecomments", 1, 1),
       ratecommentsDB
     );
   });
@@ -205,7 +208,7 @@ function init(events) {
     events.emit("done");
   });
   events.on("done", async () => {
-    lastUpdateTimeMongo.findOneAndUpdate(
+    await lastUpdateTimeMongo.findOneAndUpdate(
       { lastUpdate: Date.now() },
       { lastUpdate: Date.now() },
       { upsert: true }
@@ -217,8 +220,10 @@ function init(events) {
   events.emit("hotels", new FetchCycle(1), new Url("/hotels", 1, 5), hotelsDB);
 }
 
-export default async function batchProcess(_, res) {
-  await connectdb();
-  init(events);
-  // res.json({ cycle: "Batching in progress..." });
-}
+const batch = createScheduledFunction(
+  "Batch Process",
+  "0 0 * * *",
+  init.bind(null, events)
+);
+
+export default serve("Nulo Hotels", [batch]);

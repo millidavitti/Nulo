@@ -6,7 +6,7 @@ const parseQuery = require("../../../server/utils/parseQuery");
 const api = express();
 
 export default api.get("/api/types/categories", async (req, res) => {
-  await connectdb();
+  connectdb();
   const { filters, pag } = parseQuery(req.query);
   const categories = await categoriesDB
     .find(filters, { __v: 0 })

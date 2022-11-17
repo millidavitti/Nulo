@@ -6,7 +6,7 @@ const parseQuery = require("../../../server/utils/parseQuery");
 const api = express();
 
 export default api.get("/api/types/currencies", async (req, res) => {
-  await connectdb();
+  connectdb();
   const { filters, pag } = parseQuery(req.query);
   const currencies = await currenciesDB
     .find(filters, { __v: 0 })
