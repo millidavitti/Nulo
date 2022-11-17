@@ -220,5 +220,5 @@ function init(events) {
 export default async function batchProcess(_, res) {
   await connectdb();
   init(events);
-  res.json({ cycle: "Batching in progress..." });
+  // res.json({ cycle: "Batching in progress..." });
 }
