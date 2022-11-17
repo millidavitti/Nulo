@@ -205,7 +205,6 @@ function init(events) {
     events.emit("done");
   });
   events.on("done", async () => {
-  
     lastUpdateTimeMongo.findOneAndUpdate(
       { lastUpdate: Date.now() },
       { lastUpdate: Date.now() },
@@ -217,7 +216,7 @@ function init(events) {
 
   events.emit(
     "hotels",
-    new FetchCycle(10),
+    new FetchCycle(1),
     new Url("/hotels", 1, 1000),
     hotelsDB
   );
