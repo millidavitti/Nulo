@@ -1,24 +1,13 @@
 const axios = require("axios");
-const { resolve } = require("path");
-const { readFileSync, writeFileSync } = require("fs");
 const sha256 = require("js-sha256");
 const path = require("path");
+const lastUpdateTime = require("../models/lastUpdateTime.mongo");
 const signature = () =>
   sha256(
     `${process.env.API_KEY}${process.env.API_SECRET}${Math.floor(
       Date.now() / 1000
     )}`
   );
-
-// Create log file if it doesn't exist
-try {
-  readFileSync(resolve("server", "utils", "lastUpdateTime.json"));
-} catch (_) {
-  writeFileSync(
-    resolve("server", "utils", "lastUpdateTime.json"),
-    '{"lastUpdate":0}'
-  );
-}
 
 //Batch
 async function batch(fetchCycle, urlObj, model) {
@@ -37,9 +26,9 @@ async function batch(fetchCycle, urlObj, model) {
       },
     });
     // Last Update
-    const { lastUpdate } = JSON.parse(
-      readFileSync(resolve("server", "utils", "lastUpdateTime.json"), "utf-8")
-    );
+    const [{ lastUpdate }] = await lastUpdateTime
+      .find()
+      .sort({ lastUpdate: -1 });
 
     const date = `${new Date(lastUpdate).getFullYear()}-${new Date(
       lastUpdate

@@ -1,5 +1,4 @@
-const path = require("path");
-const fs = require("fs");
+import lastUpdateTimeMongo from "../../../server/models/lastUpdateTime.mongo";
 const EventEmitter = require("events");
 const connectdb = require("../../../server/db/connect");
 const {
@@ -206,9 +205,11 @@ function init(events) {
     events.emit("done");
   });
   events.on("done", async () => {
-    fs.writeFileSync(
-      path.resolve("server", "utils", "lastUpdateTime.json"),
-      JSON.stringify({ lastUpdate: Date.now() })
+  
+    lastUpdateTimeMongo.findOneAndUpdate(
+      { lastUpdate: Date.now() },
+      { lastUpdate: Date.now() },
+      { upsert: true }
     );
     events.removeAllListeners();
     console.log("Done Batching!");
