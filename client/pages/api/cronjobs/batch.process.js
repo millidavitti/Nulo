@@ -220,10 +220,10 @@ function init(events) {
   events.emit("hotels", new FetchCycle(1), new Url("/hotels", 1, 5), hotelsDB);
 }
 
-const batch = createScheduledFunction(
+const batchProcess = createScheduledFunction(
   "Batch Process",
   "0 0 * * *",
   init.bind(null, events)
 );
 
-export default serve("Nulo Hotels", [batch]);
+export default serve("Nulo Hotels", [batchProcess]);
