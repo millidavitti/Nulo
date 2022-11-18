@@ -219,7 +219,7 @@ function init(events) {
   events.emit("hotels", new FetchCycle(1), new Url("/hotels", 1, 5), hotelsDB);
 }
 
-export default createScheduledFunction(
+module.exports = createScheduledFunction(
   "Batch Process",
   "0 0 * * *",
   init.bind(null, events)
