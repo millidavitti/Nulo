@@ -59,6 +59,7 @@ async function batch(fetchCycle, urlObj, model) {
     urlObj.query.to += urlObj.interval;
   }
 }
+
 class FetchCycle {
   /**
    * @param {number} cycle
