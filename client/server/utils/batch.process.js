@@ -1,7 +1,6 @@
 const EventEmitter = require("events");
-const { createScheduledFunction } = require("inngest");
-const connectdb = require("../server/db/connect");
-import lastUpdateTimeMongo from "../server/models/lastUpdateTime.mongo";
+const connectdb = require("../../server/db/connect");
+const lastUpdateTimeMongo = require("../../server/models/lastUpdateTime.mongo");
 const {
   hotelsDB,
   countriesDB,
@@ -21,8 +20,8 @@ const {
   currenciesDB,
   terminalsDB,
   ratecommentsDB,
-} = require("../server/models/collections.mongo");
-const { batch, FetchCycle, Url } = require("../server/utils/cronFn");
+} = require("../../server/models/collections.mongo");
+const { batch, FetchCycle, Url } = require("../../server/utils/cronFn");
 
 const events = new EventEmitter();
 
