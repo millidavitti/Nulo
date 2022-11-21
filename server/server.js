@@ -5,8 +5,8 @@ const connectdb = require("../client/server/db/connect");
 const server = http.createServer(app);
 
 function listen() {
-    connectdb()
-  server.listen(4000, () => console.log("Listening on port 4000"));
+connectdb()
+  server.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
 }
 
 listen();
