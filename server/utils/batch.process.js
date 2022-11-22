@@ -195,7 +195,7 @@ function init(events) {
     await batch(cycle, url, db);
     events.emit(
       "ratecomments",
-      new FetchCycle(100),
+      new FetchCycle(5),
       new Url("/types/ratecomments", 1, 1000),
       ratecommentsDB
     );
@@ -215,7 +215,7 @@ function init(events) {
     console.log("Done Batching!");
   });
 
-  events.emit("hotels", new FetchCycle(40), new Url("/hotels", 1, 1000), hotelsDB);
+  events.emit("hotels", new FetchCycle(5), new Url("/hotels", 1, 1000), hotelsDB);
 }
 
 module.exports = init.bind(null,events)
