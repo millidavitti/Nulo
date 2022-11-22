@@ -1,7 +1,7 @@
 name: Nulo Batch Process
 on:
   schedule:
-    - cron: '* 0 * * *'
+    - cron: '0 0 * * *'
 jobs:
   build:
     name: Batch Process
