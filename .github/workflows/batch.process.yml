@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Process Endpoint
-        run: -curl -X GET https://nulo-batch-process.up.railway.app/railway.app/
+        run: curl https://nulo-batch-process.up.railway.app/railway.app/
