@@ -1,6 +1,6 @@
 name: Nulo Batch Process
 on:
-  schdeule:
+  schedule:
     - cron: '* 0 * * *'
 jobs:
   build:
