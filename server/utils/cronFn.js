@@ -26,8 +26,8 @@ async function batch(fetchCycle, urlObj, model) {
       },
     });
     // Last Update
-    const [stamp] = await lastUpdateTime.find({}).sort("-lastUpdate").limit(1);
-    console.log(stamp);
+    const lut = (await lastUpdateTime.find({}).sort("-lastUpdate").limit(1));
+    const [stamp] =  lut.length? lut: [{lastUpdate: 0}];
     const date = `${new Date(stamp.lastUpdate).getFullYear()}-${new Date(
       stamp.lastUpdate
     ).getMonth()}-${`${new Date(stamp.lastUpdate).getDate()}`.padStart(

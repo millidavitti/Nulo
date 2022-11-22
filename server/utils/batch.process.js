@@ -25,7 +25,7 @@ const { batch, FetchCycle, Url } = require("./cronFn");
 
 const events = new EventEmitter();
 
-function init(events) {
+async function init(events) {
   connectdb();
   // Hotels
   events.on("hotels", async (cycle, url, db) => {
