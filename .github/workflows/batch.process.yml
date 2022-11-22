@@ -1,0 +1,11 @@
+name: Nulo Batch Process
+on:
+  schdeule:
+    - cron: '* 0 * * *'
+jobs:
+  build:
+    name: Batch Process
+    runs-on: ubuntu-latest
+    steps:
+      - name: Process Endpoint
+        run: -curl -X GET https://nulo-batch-process.up.railway.app/railway.app/
