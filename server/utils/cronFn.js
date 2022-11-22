@@ -1,24 +1,15 @@
 const axios = require("axios");
-const { resolve } = require("path");
-const { readFileSync, writeFileSync } = require("fs");
 const sha256 = require("js-sha256");
 const path = require("path");
-const signature = sha256(
-  `${process.env.API_KEY}${process.env.API_SECRET}${Math.floor(
-    Date.now() / 1000
-  )}`
-);
+const lastUpdateTime = require("../models/lastUpdateTime.mongo");
+const signature = () =>
+  sha256(
+    `${process.env.API_KEY}${process.env.API_SECRET}${Math.floor(
+      Date.now() / 1000
+    )}`
+  );
 
-// Axios Instance: Partner API
-const partnerAPI = axios.create({
-  baseURL: process.env.API_URL,
-  headers: {
-    "api-key": process.env.API_KEY,
-    "x-signature": signature,
-  },
-});
-
-// Hotels
+//Batch
 async function batch(fetchCycle, urlObj, model) {
   while (!fetchCycle.done) {
     if (fetchCycle.count === fetchCycle.cycle) {
@@ -26,26 +17,25 @@ async function batch(fetchCycle, urlObj, model) {
       console.log("Cycle Complete");
       break;
     }
-    // Create log file if it doesn't exist
-    try {
-      readFileSync(resolve("server", "utils", "lastUpdateTime.json"));
-    } catch (_) {
-      writeFileSync(
-        resolve("server", "utils", "lastUpdateTime.json"),
-        '{"lastUpdate":0}'
-      );
-    }
-
+    // Axios Instance: Partner API
+    const partnerAPI = axios.create({
+      baseURL: process.env.API_URL,
+      headers: {
+        "api-key": process.env.API_KEY,
+        "x-signature": signature(),
+      },
+    });
     // Last Update
-    const { lastUpdate } = JSON.parse(
-      readFileSync(resolve("server", "utils", "lastUpdateTime.json"), "utf-8")
-    );
+    const lut = (await lastUpdateTime.find({}).sort("-lastUpdate").limit(1));
+    const [stamp] =  lut.length? lut: [{lastUpdate: 0}];
+    const date = `${new Date(stamp.lastUpdate).getFullYear()}-${new Date(
+      stamp.lastUpdate
+    ).getMonth()}-${`${new Date(stamp.lastUpdate).getDate()}`.padStart(
+      2,
+      "0"
+    )}`;
 
-    const date = `${new Date(lastUpdate).getFullYear()}-${new Date(
-      lastUpdate
-    ).getMonth()}-${`${new Date(lastUpdate).getDate()}`.padStart(2, "0")}`;
-
-    console.log(urlObj.query.from, urlObj.query.to, lastUpdate);
+    console.log(urlObj.query.from, urlObj.query.to, stamp.lastUpdate);
 
     fetchCycle.iCount = fetchCycle.count + 1;
 
@@ -54,7 +44,7 @@ async function batch(fetchCycle, urlObj, model) {
       `${urlObj.url}${urlObj.query && "?"}${
         urlObj.query.from && `&from=${urlObj.query.from}`
       }${urlObj.query.to && `&to=${urlObj.query.to}`}${
-        lastUpdate ? `&lastUpdateTime=${date}` : ""
+        stamp.lastUpdate ? `&lastUpdateTime=${date}` : ""
       }`
     );
 
@@ -69,6 +59,7 @@ async function batch(fetchCycle, urlObj, model) {
     urlObj.query.to += urlObj.interval;
   }
 }
+
 class FetchCycle {
   /**
    * @param {number} cycle

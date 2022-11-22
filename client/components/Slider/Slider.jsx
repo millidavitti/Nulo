@@ -61,7 +61,7 @@ export default function Slider({ data }) {
 	}
 
 	return (
-		<div className={slider.slideWrap}>
+        <div className={slider.slideWrap}>
 			<div className={slider.navBtns}>
 				<span onClick={back}>
 					<ChevronLeftArrow size={15} stroke='var(--headers)' />
@@ -74,21 +74,21 @@ export default function Slider({ data }) {
 				<div className={slider.slideRack} ref={slide}>
 					{data.map((link, key, arr) =>
 						key + 1 === arr.length ? (
-							<Link href='/hotel/listings' key={key}>
-								<a>
-									<Slide url={link} ref={slideRef} />
-								</a>
-							</Link>
+							(<Link href='/hotel/listings' key={key}>
+
+                                <Slide url={link} ref={slideRef} />
+
+                            </Link>)
 						) : (
-							<Link href='/hotel/listings' key={key}>
-								<a>
-									<Slide url={link} />
-								</a>
-							</Link>
+							(<Link href='/hotel/listings' key={key}>
+
+                                <Slide url={link} />
+
+                            </Link>)
 						),
 					)}
 				</div>
 			</div>
 		</div>
-	);
+    );
 }

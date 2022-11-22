@@ -7,10 +7,10 @@ import Link from "next/link";
 
 export default function HotelCard({ data }) {
 	return (
-		<div className={home.hotelCard}>
+        <div className={home.hotelCard}>
 			<CardSlider hotelImgs={data} />
 			<Container>
-				<Link href='/hotel/hotel-details'>
+				<Link href='/hotel/hotel-details' legacyBehavior>
 					<div className={home.hotelInfo}>
 						<p className={home.beds}>Entire cabin - 10 beds</p>
 						<SubHeadings>Bell By Greene King Inns</SubHeadings>
@@ -35,5 +35,5 @@ export default function HotelCard({ data }) {
 				</Link>
 			</Container>
 		</div>
-	);
+    );
 }

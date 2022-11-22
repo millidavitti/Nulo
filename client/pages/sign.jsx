@@ -10,8 +10,8 @@ const IndexPage = ({ session }) => {
 		}
 
 		return (
-			<div>
-				<Link href='/api/auth/signin'>
+            <div>
+				<Link href='/api/auth/signin' legacyBehavior>
 					<button
 						onClick={(e) => {
 							e.preventDefault();
@@ -22,7 +22,7 @@ const IndexPage = ({ session }) => {
 					</button>
 				</Link>
 			</div>
-		);
+        );
 	};
 
 	const signOutButtonNode = () => {
@@ -31,8 +31,8 @@ const IndexPage = ({ session }) => {
 		}
 
 		return (
-			<div>
-				<Link href='/api/auth/signout'>
+            <div>
+				<Link href='/api/auth/signout' legacyBehavior>
 					<button
 						onClick={(e) => {
 							e.preventDefault();
@@ -43,7 +43,7 @@ const IndexPage = ({ session }) => {
 					</button>
 				</Link>
 			</div>
-		);
+        );
 	};
 
 	if (!session) {

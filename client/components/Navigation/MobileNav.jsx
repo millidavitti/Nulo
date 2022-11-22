@@ -49,68 +49,66 @@ export default function MobileNav() {
 		};
 	});
 
-	return (
-		<>
-			<nav className='mobile-nav' ref={nav}>
-				<Link href='/'>
-					<div
-						className='mobile-menu'
-						onClick={() => {
-							dispatch({ type: "explore" });
-						}}
-					>
-						<Search
-							size={25}
-							stroke={router.pathname === "/" ? "crimson" : "var(--headers)"}
-						/>
-						<h4>Explore</h4>
-					</div>
-				</Link>
-				<Link href='/user/saves'>
-					<div
-						className='mobile-menu'
-						onClick={() => {
-							dispatch({ type: "saves" });
-						}}
-					>
-						<Heart
-							size={25}
-							fill={
-								router.query.path === "saves" ? "crimson" : "var(--headers)"
-							}
-						/>
-						<h4>Saves</h4>
-					</div>
-				</Link>
-				<Link href='/user/account-info'>
-					<div
-						className='mobile-menu'
-						onClick={() => {
-							dispatch({ type: "me" });
-						}}
-					>
-						<User
-							size={25}
-							fill={
-								router.query.path === "account-info"
-									? "crimson"
-									: "var(--headers)"
-							}
-						/>
-						<h4>Me</h4>
-					</div>
-				</Link>
-				<div
-					className='mobile-menu'
-					onClick={() => {
-						dispatch({ type: "menu" });
-					}}
-				>
-					<Menu size={20} fill={"var(--headers)"} />
-					<h4>Menu</h4>
-				</div>
-			</nav>
-			<Navigation state={state} dispatch={dispatch} />
-		</>
-	);
+	return <>
+        <nav className='mobile-nav' ref={nav}>
+            <Link href='/' legacyBehavior>
+                <div
+                    className='mobile-menu'
+                    onClick={() => {
+                        dispatch({ type: "explore" });
+                    }}
+                >
+                    <Search
+                        size={25}
+                        stroke={router.pathname === "/" ? "crimson" : "var(--headers)"}
+                    />
+                    <h4>Explore</h4>
+                </div>
+            </Link>
+            <Link href='/user/saves' legacyBehavior>
+                <div
+                    className='mobile-menu'
+                    onClick={() => {
+                        dispatch({ type: "saves" });
+                    }}
+                >
+                    <Heart
+                        size={25}
+                        fill={
+                            router.query.path === "saves" ? "crimson" : "var(--headers)"
+                        }
+                    />
+                    <h4>Saves</h4>
+                </div>
+            </Link>
+            <Link href='/user/account-info' legacyBehavior>
+                <div
+                    className='mobile-menu'
+                    onClick={() => {
+                        dispatch({ type: "me" });
+                    }}
+                >
+                    <User
+                        size={25}
+                        fill={
+                            router.query.path === "account-info"
+                                ? "crimson"
+                                : "var(--headers)"
+                        }
+                    />
+                    <h4>Me</h4>
+                </div>
+            </Link>
+            <div
+                className='mobile-menu'
+                onClick={() => {
+                    dispatch({ type: "menu" });
+                }}
+            >
+                <Menu size={20} fill={"var(--headers)"} />
+                <h4>Menu</h4>
+            </div>
+        </nav>
+        <Navigation state={state} dispatch={dispatch} />
+    </>;
 }

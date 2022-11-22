@@ -1,7 +1,6 @@
-const path = require("path");
-const fs = require("fs");
 const EventEmitter = require("events");
-const connectdb = require("../../../server/db/connect");
+const connectdb = require("../db/connect");
+const lastUpdateTimeMongo = require("../models/lastUpdateTime.mongo");
 const {
   hotelsDB,
   countriesDB,
@@ -21,12 +20,13 @@ const {
   currenciesDB,
   terminalsDB,
   ratecommentsDB,
-} = require("../../../server/models/collections.mongo");
-const { batch, FetchCycle, Url } = require("../../../server/utils/cronFn");
+} = require("../models/collections.mongo");
+const { batch, FetchCycle, Url } = require("./cronFn");
 
 const events = new EventEmitter();
 
 function init(events) {
+  connectdb();
   // Hotels
   events.on("hotels", async (cycle, url, db) => {
     console.log("Polling Hotels...");
@@ -34,7 +34,7 @@ function init(events) {
     events.emit(
       "countries",
       new FetchCycle(1),
-      new Url("/locations/countries", 1, 500),
+      new Url("/locations/countries", 1, 1000),
       countriesDB
     );
   });
@@ -66,7 +66,7 @@ function init(events) {
     events.emit(
       "boards",
       new FetchCycle(1),
-      new Url("/types/boards", 1, 100),
+      new Url("/types/boards", 1, 1000),
       boardsDB
     );
   });
@@ -76,7 +76,7 @@ function init(events) {
     events.emit(
       "accommodations",
       new FetchCycle(1),
-      new Url("/types/accommodations", 1, 100),
+      new Url("/types/accommodations", 1, 1000),
       accommodationsDB
     );
   });
@@ -86,7 +86,7 @@ function init(events) {
     events.emit(
       "categories",
       new FetchCycle(1),
-      new Url("/types/categories", 1, 100),
+      new Url("/types/categories", 1, 1000),
       categoriesDB
     );
   });
@@ -116,7 +116,7 @@ function init(events) {
     events.emit(
       "facilitygroups",
       new FetchCycle(1),
-      new Url("/types/facilitygroups", 1, 100),
+      new Url("/types/facilitygroups", 1, 1000),
       facilitygroupsDB
     );
   });
@@ -126,7 +126,7 @@ function init(events) {
     events.emit(
       "issues",
       new FetchCycle(1),
-      new Url("/types/issues", 1, 200),
+      new Url("/types/issues", 1, 1000),
       issuesDB
     );
   });
@@ -136,7 +136,7 @@ function init(events) {
     events.emit(
       "languages",
       new FetchCycle(1),
-      new Url("/types/languages", 1, 100),
+      new Url("/types/languages", 1, 1000),
       languagesDB
     );
   });
@@ -146,7 +146,7 @@ function init(events) {
     events.emit(
       "promotions",
       new FetchCycle(1),
-      new Url("/types/promotions", 1, 200),
+      new Url("/types/promotions", 1, 1000),
       promotionsDB
     );
   });
@@ -156,7 +156,7 @@ function init(events) {
     events.emit(
       "segments",
       new FetchCycle(1),
-      new Url("/types/segments", 1, 100),
+      new Url("/types/segments", 1, 1000),
       segmentsDB
     );
   });
@@ -166,7 +166,7 @@ function init(events) {
     events.emit(
       "imagetypes",
       new FetchCycle(1),
-      new Url("/types/imagetypes", 1, 100),
+      new Url("/types/imagetypes", 1, 1000),
       imagetypesDB
     );
   });
@@ -176,7 +176,7 @@ function init(events) {
     events.emit(
       "currencies",
       new FetchCycle(1),
-      new Url("/types/currencies", 1, 200),
+      new Url("/types/currencies", 1, 1000),
       currenciesDB
     );
   });
@@ -195,7 +195,7 @@ function init(events) {
     await batch(cycle, url, db);
     events.emit(
       "ratecomments",
-      new FetchCycle(100),
+      new FetchCycle(5),
       new Url("/types/ratecomments", 1, 1000),
       ratecommentsDB
     );
@@ -206,24 +206,16 @@ function init(events) {
     events.emit("done");
   });
   events.on("done", async () => {
-    fs.writeFileSync(
-      path.resolve("server", "utils", "lastUpdateTime.json"),
-      JSON.stringify({ lastUpdate: Date.now() })
+    await lastUpdateTimeMongo.findOneAndUpdate(
+      { lastUpdate: Date.now() },
+      { lastUpdate: Date.now() },
+      { upsert: true }
     );
     events.removeAllListeners();
     console.log("Done Batching!");
   });
 
-  events.emit(
-    "hotels",
-    new FetchCycle(175),
-    new Url("/hotels", 1, 1000),
-    hotelsDB
-  );
+  events.emit("hotels", new FetchCycle(5), new Url("/hotels", 1, 1000), hotelsDB);
 }
 
-export default async function batchProcess(_, res) {
-  await connectdb();
-  init(events);
-  res.json({ cycle: "Batching in progress..." });
-}
+module.exports = init.bind(null,events)

@@ -7,7 +7,7 @@ import ThemeSelect from "../Widgets/ThemeSelect";
 
 export default function Navigation({ state, dispatch }) {
 	return (
-		<div
+        <div
 			className='navOverlay'
 			style={{
 				opacity: state.menu.toggle ? "1" : "0",
@@ -56,7 +56,7 @@ export default function Navigation({ state, dispatch }) {
 				{/* Nav Links */}
 				<nav className='nav-links'>
 					<ul>
-						<Link href='#home'>
+						<Link href='#home' legacyBehavior>
 							<li
 								className='nav-link'
 								onClick={() => dispatch({ type: "show-drop", navlink: "home" })}
@@ -75,7 +75,7 @@ export default function Navigation({ state, dispatch }) {
 											state.dropDown.current === "home" ? "500px" : "0",
 									}}
 								>
-									<Link href='/'>
+									<Link href='/' legacyBehavior>
 										<p
 											onClick={() => dispatch({ type: "menu" })}
 											style={{
@@ -87,7 +87,7 @@ export default function Navigation({ state, dispatch }) {
 											Home
 										</p>
 									</Link>
-									<Link href='/user/saves'>
+									<Link href='/user/saves' legacyBehavior>
 										<p
 											onClick={() => dispatch({ type: "menu" })}
 											style={{
@@ -99,7 +99,7 @@ export default function Navigation({ state, dispatch }) {
 											Saves
 										</p>
 									</Link>
-									<Link href='/user/account-info'>
+									<Link href='/user/account-info' legacyBehavior>
 										<p
 											onClick={() => dispatch({ type: "menu" })}
 											style={{
@@ -113,7 +113,7 @@ export default function Navigation({ state, dispatch }) {
 								</div>
 							</li>
 						</Link>
-						<Link href='#product'>
+						<Link href='#product' legacyBehavior>
 							<li
 								className='nav-link'
 								onClick={() =>
@@ -168,5 +168,5 @@ export default function Navigation({ state, dispatch }) {
 				</nav>
 			</div>
 		</div>
-	);
+    );
 }
