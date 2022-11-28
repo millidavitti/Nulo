@@ -24,11 +24,10 @@ import TabNav from '../components/TabNav'
 import NewsLetter from '../components/NewsLetter'
 import { cityImgs, imgArray, stays } from '../utils/helpers'
 import Head from 'next/head'
-import useSWR from 'swr'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default function Home({ data }) {
-  console.log(data)
+ console.log(data)
  return (
   <>
    <Head>
@@ -215,10 +214,23 @@ export default function Home({ data }) {
   </>
  )
 }
-// const fetcher = (url) => axios.post(url).then((res) => res.data)
+
 export async function getServerSideProps() {
- //   const { data } = useSWR('/api/hotels', fetcher)
+ const { data } = await axios.post('http://localhost:3000/api/hotels', {
+  filters: {
+   $or: [
+    { countryCode: { $in: ['AL', 'AO', 'Tropojës', 'Zaire'] } },
+    { destinationCode: { $in: ['01H', 'ACE', 'Tropojës', 'Zaire'] } },
+   ],
+  },
+  projection: {
+   name: 1,
+   destinationCode: 1,
+   countryCode: 1,
+   isoCode: 1,
+  },
+ })
  return {
-  props: { data: 25141415 },
+  props: { data },
  }
 }
