@@ -1,19 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import Description from "../../components/Description";
-import Headings from "../../components/Headings";
-import Container from "../../components/Layout/Container";
-import Grid from "../../components/Layout/Grid";
-import Section from "../../components/Layout/Section";
-import home from "../../styles/Home.module.css";
-import listings from "../../styles/listings.module.css";
-import image from "../../assets/image.jpg";
-import { Close, House, Map } from "../../assets/SVG.config";
-import ResponsiveGrid from "../../components/Layout/ResponsiveGrid";
-import HotelCard from "../../components/HotelCard";
-import NewsLetter from "../../components/NewsLetter";
-import Margin from "../../components/Layout/Margin";
+import Description from "../../../components/Description";
+import Headings from "../../../components/Headings";
+import Container from "../../../components/Layout/Container";
+import Grid from "../../../components/Layout/Grid";
+import Section from "../../../components/Layout/Section";
+import home from "../../../styles/Home.module.css";
+import listings from "../../../styles/listings.module.css";
+import { Close, House, Map } from "../../../assets/SVG.config";
+import ResponsiveGrid from "../../../components/Layout/ResponsiveGrid";
+import HotelCard from "../../../components/HotelCard";
+import NewsLetter from "../../../components/NewsLetter";
+import Margin from "../../../components/Layout/Margin";
 import { useReducer } from "react";
-import { imgArray } from "../../utils/helpers";
+import { imgArray } from "../../../utils/helpers";
 import Head from "next/head";
 function reducer(state, action) {
 	switch (action.type) {

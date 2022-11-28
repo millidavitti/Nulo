@@ -10,7 +10,7 @@ export default function HotelCard({ data }) {
         <div className={home.hotelCard}>
 			<CardSlider hotelImgs={data} />
 			<Container>
-				<Link href='/hotel/hotel-details' legacyBehavior>
+				<Link href='/hotel/hotel-details' >
 					<div className={home.hotelInfo}>
 						<p className={home.beds}>Entire cabin - 10 beds</p>
 						<SubHeadings>Bell By Greene King Inns</SubHeadings>
