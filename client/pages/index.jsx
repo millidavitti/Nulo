@@ -24,10 +24,12 @@ import TabNav from '../components/TabNav'
 import NewsLetter from '../components/NewsLetter'
 import { cityImgs, imgArray, stays } from '../utils/helpers'
 import Head from 'next/head'
-import axios from 'axios'
+// SSR
+import connectdb from '../serverless/db/connect'
+import hotelDB from '../serverless/models/hotels.mongo'
 
-export default function Home({ data }) {
- console.log(data)
+export default function Home({ travelDestinations }) {
+ console.log(JSON.parse(travelDestinations))
  return (
   <>
    <Head>
@@ -216,21 +218,25 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps() {
- const { data } = await axios.post('http://localhost:3000/api/hotels', {
-  filters: {
-   $or: [
-    { countryCode: { $in: ['AL', 'AO', 'Tropojës', 'Zaire'] } },
-    { destinationCode: { $in: ['01H', 'ACE', 'Tropojës', 'Zaire'] } },
-   ],
-  },
-  projection: {
-   name: 1,
-   destinationCode: 1,
-   countryCode: 1,
-   isoCode: 1,
-  },
- })
+ connectdb()
+ const data = await hotelDB
+  .find(
+   {
+    $or: [
+     { countryCode: { $in: ['AL', 'AO', 'Tropojës', 'Zaire'] } },
+     { destinationCode: { $in: ['01H', 'ACE', 'Tropojës', 'Zaire'] } },
+    ],
+   },
+   {
+    name: 1,
+    destinationCode: 1,
+    countryCode: 1,
+   }
+  )
+  .skip( 0)
+  .limit(10)
+const travelDestinations = JSON.stringify(data)
  return {
-  props: { data },
+  props: { travelDestinations },
  }
 }
