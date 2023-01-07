@@ -5,7 +5,7 @@ import {
 	ChevronRightArrow,
 	Heart,
 } from "../../assets/SVG.config";
-import image from "../../assets/image.jpg";
+// import image from "../../assets/image.jpg";
 import cardSlider from "../../styles/cardSlider.module.css";
 
 function reducer(state, action) {

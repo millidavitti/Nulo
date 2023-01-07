@@ -5,11 +5,11 @@
  "main": "index.js",
  "scripts": {
   "test": "echo \"Error: no test specified\" && exit 1",
-  "next": "npx create-next-app@latest",
-  "start": "npm run start --prefix server",
+  "next": "npm run start -prefix client",
   "dev": "npm run dev --prefix client",
-  "postman": "node ./client/postman",
-  "build": "npm run build --prefix client"
+  "build": "npm run build --prefix client",
+  "start": "npm run start --prefix server",
+  "postman": "nodemon ./client/postman"
  },
  "repository": {
   "type": "git",

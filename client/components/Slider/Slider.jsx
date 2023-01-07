@@ -1,9 +1,8 @@
-import React, { useRef, useReducer, useEffect } from 'react'
+import React, { useRef, useReducer, useEffect, useState } from 'react'
 import slider from '../../styles/slider.module.css'
 import { ChevronLeftArrow, ChevronRightArrow } from '../../assets/SVG.config'
 import { cityImgs, observingNode } from '../../utils/helpers'
 import Slide from './Slide'
-import { useState } from 'react'
 import Link from 'next/link'
 
 function reducer(state, action) {
@@ -23,13 +22,13 @@ const init = {
  index: 0,
 }
 
-export default function Slider({ data }) {
+export default function Slider({ slideRef = null, children }) {
  const slide = useRef()
- const slideRef = useRef()
  const root = useRef()
  const nodes = slide.current?.childNodes.length
  const [state, dispatch] = useReducer(reducer, init)
  const [isLast, setIsLast] = useState()
+
  const observerFn = (entries) => {
   const [entry] = entries
   setIsLast(entry.isIntersecting)
@@ -37,7 +36,7 @@ export default function Slider({ data }) {
 
  useEffect(() => {
   slide.current.style.transform = `translateX(-${state.index * 270}px)`
- })
+ }, [state.index])
 
  useEffect(() => {
   const slide = slideRef.current
@@ -49,7 +48,7 @@ export default function Slider({ data }) {
   return () => {
    observer.unobserve(slide)
   }
- }, [])
+ })
 
  function foward() {
   if (isLast) dispatch({ type: 'reset' })
@@ -72,24 +71,7 @@ export default function Slider({ data }) {
    </div>
    <div className={slider.slider} ref={root}>
     <div className={slider.slideRack} ref={slide}>
-     {/**
-      * {
-      * name:String,
-      *
-      * }
-      */}
-     {data.map((city, key, arr) =>
-      //Conditional For Observer to Observe
-      key + 1 === arr.length ? (
-       <Link href={`/hotel/listings/${'city.name.content'}`} key={key}>
-        <Slide url={city} ref={slideRef} />
-       </Link>
-      ) : (
-       <Link href={`/hotel/listings/${'city.name.content'}`} key={key}>
-        <Slide url={city} />
-       </Link>
-      )
-     )}
+     {children}
     </div>
    </div>
   </div>

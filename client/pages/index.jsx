@@ -22,14 +22,20 @@ import SVGFrame from '../components/Layout/SVGFrame'
 import NearbyHotels from '../components/NearbyHotels'
 import TabNav from '../components/TabNav'
 import NewsLetter from '../components/NewsLetter'
-import { cityImgs, imgArray, stays } from '../utils/helpers'
+import { imgArray, stays } from '../utils/helpers'
 import Head from 'next/head'
+import Link from 'next/link'
 // SSR
-import connectdb from '../serverless/db/connect'
-import hotelDB from '../serverless/models/hotels.mongo'
+import axios from 'axios'
+import { pollDestinations } from '../hooks/request'
+import Slide from '../components/Slider/Slide'
+import { useRef } from 'react'
 
-export default function Home({ travelDestinations }) {
- console.log(JSON.parse(travelDestinations))
+const fetcher = (url) => axios.post(url).then((res) => res.data)
+
+export default function Home({ destinations }) {
+ const slideRef = useRef()
+
  return (
   <>
    <Head>
@@ -78,7 +84,26 @@ export default function Home({ travelDestinations }) {
       <Headings>Travel City Locations</Headings>
       <Description>Top cities by volume</Description>
      </div>
-     <Slider data={cityImgs} />
+     <Slider slideRef={slideRef}>
+      {JSON.parse(destinations).map((des, key, arr) =>
+       //Conditional For Observer to Observe
+       key + 1 === arr.length ? (
+        <Link
+         href={`/hotel/listings/${des.code}?isoCode=${des.isoCode}&city=${des.name.content}`}
+         key={key}
+        >
+         <Slide thumb={des.thumb} name={des.name.content} ref={slideRef} />
+        </Link>
+       ) : (
+        <Link
+         href={`/hotel/listings/${des.code}?isoCode=${des.isoCode}&city=${des.name.content}`}
+         key={key}
+        >
+         <Slide thumb={des.thumb} name={des.name.content} />
+        </Link>
+       )
+      )}
+     </Slider>
     </Container>
    </Section>
    {/* Why Us */}
@@ -210,7 +235,7 @@ export default function Home({ travelDestinations }) {
     <Container>
      <Headings>Exlpore by types of stays</Headings>
      <Description>Explore house based on 10 types of stays</Description>
-     <Slider data={stays} />
+     {/* <Slider data={stays} /> */}
     </Container>
    </Section>
   </>
@@ -218,25 +243,8 @@ export default function Home({ travelDestinations }) {
 }
 
 export async function getServerSideProps() {
- connectdb()
- const data = await hotelDB
-  .find(
-   {
-    $or: [
-     { countryCode: { $in: ['AL', 'AO', 'Tropojës', 'Zaire'] } },
-     { destinationCode: { $in: ['01H', 'ACE', 'Tropojës', 'Zaire'] } },
-    ],
-   },
-   {
-    name: 1,
-    destinationCode: 1,
-    countryCode: 1,
-   }
-  )
-  .skip( 0)
-  .limit(10)
-const travelDestinations = JSON.stringify(data)
+ const destinations = await pollDestinations()
  return {
-  props: { travelDestinations },
+  props: { destinations },
  }
 }

@@ -33,11 +33,27 @@ axios.post('https://hdtje5-3000.preview.csb.app/api/hotels', {
 })
 //  .then((res) => console.log(res.data, res.data.length))
 
-axios['post']('https://hdtje5-3000.preview.csb.app/api/hotels/7', {
- projection: {
-  name: 1,
-  destinationCode: 1,
-  //   countryCode: 1,
-  email: 1,
- },
-}).then((res) => console.log(res.data))
+// axios['post']('https://hdtje5-3000.preview.csb.app/api/hotels/7', {
+//  projection: {
+//   name: 1,
+//   destinationCode: 1,
+//   //   countryCode: 1,
+//   email: 1,
+//  },
+// }).then((res) => console.log(res.data))
+
+axios
+ .post('https://hdtje5-3000.preview.csb.app/api/locations/countries', {
+  filters: {
+   code: 'UK',
+  },
+  projection: {
+   code: 1,
+  },
+ })
+ .then((res) => console.log('post: ', res.data))
+console.log(2 + (9 - 11))
+
+// axios
+//  .get('https://hdtje5-3000.preview.csb.app/api/locations/countries?code=UK')
+//  .then((res) => console.log('get: ', res.data))

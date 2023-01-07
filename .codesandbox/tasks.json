@@ -13,6 +13,10 @@
       "name": "npm start",
       "command": "npm start",
       "runAtStart": false
+    },
+    "npm run postman": {
+      "name": "npm run postman",
+      "command": "npm run postman"
     }
   }
 }
